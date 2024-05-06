@@ -1,0 +1,155 @@
+.SiteEcho {
+  width: 1280px;
+  height: 3273px;
+  position: relative;
+  background: #fdfdfd;
+}
+.Image45 {
+  width: 1285px;
+  height: 537px;
+  left: 0px;
+  top: 323px;
+  position: absolute;
+}
+.Image46 {
+  width: 600px;
+  height: 562px;
+  left: 40px;
+  top: 1279px;
+  position: absolute;
+}
+.Histoire_produit {
+  left: 257px;
+  top: 916px;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 35px;
+  display: inline-flex;
+}
+.Histoire {
+  color: black;
+  font-size: 48px;
+  font-family: Rubik;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+.histoire {
+  color: black;
+  font-size: 16px;
+  font-family: Rubik;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.Partenariats_Echo {
+  height: 301px;
+  left: 40px;
+  top: 2022px;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 35px;
+  display: inline-flex;
+}
+.Partenariats {
+  color: black;
+  font-size: 48px;
+  font-family: Rubik;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+.partenariats {
+  width: 1167px;
+  color: black;
+  font-size: 16px;
+  font-family: Rubik;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.Le_Produit {
+  left: 698px;
+  top: 1311px;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 35px;
+  display: inline-flex;
+}
+.LeProduit {
+  color: black;
+  font-size: 48px;
+  font-family: Rubik;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+.produit {
+  width: 569px;
+  height: 436px;
+  color: black;
+  font-size: 16px;
+  font-family: Rubik;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.Frame88, .Frame89 {
+  width: 420px;
+  height: 235px;
+  position: relative;
+}
+.Rectangle4178, .Rectangle4178 {
+  width: 420px;
+  height: 219px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  background: #fdfdfd;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 22.79px;
+}
+.Logo {
+  width: 384px;
+  height: 108.09px;
+  left: 18px;
+  top: 63px;
+  position: absolute;
+}
+.MelodicaV {
+  width: 384px;
+  height: 93.88px;
+  left: 0px;
+  top: 0.97px;
+  position: absolute;
+  text-align: center;
+  color: #560bad;
+  font-size: 105.88px;
+  font-family: Black Heat Free Demo;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.MelodicaR {
+  left: 12.29px;
+  top: 0px;
+  position: absolute;
+  text-align: center;
+  color: #f72585;
+  font-size: 105.88px;
+  font-family: Black Heat Free Demo;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.Festival {
+  left: 298.82px;
+  top: 87.09px;
+  position: absolute;
+  text-align: center;
+  color: #121212;
+  font-size: 23.53px;
+  font-family: Black Heat Free Demo;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+

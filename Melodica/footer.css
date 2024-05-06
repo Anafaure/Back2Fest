@@ -1,0 +1,113 @@
+.Footer {
+  width: 1280px;
+  height: 400px;
+  left: 0px;
+  top: 3599px;
+  position: absolute;
+}
+.Rectangle_footer {
+  width: 1280px;
+  height: 400px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  background: #560bad;
+}
+.NousContacter {
+  left: 103px;
+  top: 43px;
+  position: absolute;
+  color: #fdfdfd;
+  font-size: 36px;
+  font-family: Rubik;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+.Politiques {
+  left: 551px;
+  top: 43px;
+  position: absolute;
+  color: #fdfdfd;
+  font-size: 36px;
+  font-family: Rubik;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+.Réseaux {
+  left: 903px;
+  top: 43px;
+  position: absolute;
+  color: #fdfdfd;
+  font-size: 36px;
+  font-family: Rubik;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+.nous_contacter {
+  width: 190px;
+  height: 226px;
+  left: 103px;
+  top: 112px;
+  position: absolute;
+  color: #fdfdfd;
+  font-size: 16px;
+  font-family: Rubik;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.politiques {
+  width: 190px;
+  height: 226px;
+  left: 551px;
+  top: 127px;
+  position: absolute;
+  color: #fdfdfd;
+  font-size: 16px;
+  font-family: Rubik;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.réseaux {
+  width: 190px;
+  height: 226px;
+  left: 903px;
+  top: 127px;
+  position: absolute;
+  color: #fdfdfd;
+  font-size: 16px;
+  font-family: Rubik;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .nous_contacter, .réseaux {
+        font-size: calc(0.8rem + 1vw); /* Ajustement dynamique de la taille de la police */
+        width: 30vw; /* Utilisation de vw pour une largeur responsive */
+        height: 25vh; /* Utilisation de vh pour une hauteur responsive */
+    }
+
+    .nous_contacter {
+        top: 10vh; /* Utilisation de vh pour un positionnement vertical responsive */
+    }
+
+    .réseaux {
+        top: 40vh; /* Utilisation de vh pour un positionnement vertical responsive */
+    }
+}
+
+@media (max-width: 480px) {
+    .nous_contacter, .réseaux {
+        font-size: calc(0.75rem + 1.5vw); /* Ajustement plus dynamique pour les petits écrans */
+        width: 40vw; /* Augmentation de la largeur pour les très petits écrans */
+        height: 30vh; /* Augmentation de la hauteur pour les très petits écrans */
+    }
+
+    .nous_contacter {
+        top: 8vh; /* Ajustement fin pour les très petits écrans */
+    }
+
+    .réseaux {
+        top: 45vh; /* Ajustement fin pour éviter la superposition */
+    }
+}
