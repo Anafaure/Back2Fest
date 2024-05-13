@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "123251248735",
+    "project_id": "back2fest-e06f6",
+    "storage_bucket": "back2fest-e06f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123251248735:android:54156d91e28d3308c515ea",
+        "android_client_info": {
+          "package_name": "com.eds.back2fest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCssdC_majV_jldOxSgCrUn8Xo4hA5u8gk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
