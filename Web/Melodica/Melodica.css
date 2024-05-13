@@ -1,8 +1,20 @@
-.Rectangle4169 {
+.backgroundMelodica {
+  width: 1280px;
+  height: 3999px;
+  position: relative;
+  background: black;
+}
+.SiteMelodica {
+  width: 1280px;
+  height: 3999px;
+  position: relative;
+  background: black;
+}
+.Header {
   width: 100%;
   height: 711px;
-  left: 0px;
-  top: 0px;
+  left: 0%;
+  top: 0%;
   position: absolute;
   background-image: url("../Images/Concert_ombre.png");
   background-size: cover;
@@ -10,20 +22,15 @@
 .LogoMelodica {
   width: 938.38px;
   height: 264.83px;
-  padding-bottom: 0.01px;
+  /* padding-bottom: 0.01px; */
   left: 171px;
   top: 66.17px;
   position: absolute;
-  justify-content: center;
+  /* justify-content: center;
   align-items: center;
-  display: inline-flex;
+  display: inline-flex; */
 }
-.Logo {
-  width: 938.38px;
-  height: 264.82px;
-  position: relative;
-}
-.MelodicaV {
+.MelodicaViolet {
   width: 938.38px;
   height: 229.42px;
   left: 0px;
@@ -36,7 +43,7 @@
   font-weight: 400;
   word-wrap: break-word;
 }
-.MelodicaR {
+.MelodicaRose {
   left: 30.02px;
   top: -0px;
   position: absolute;
@@ -58,22 +65,26 @@
   font-weight: 400;
   word-wrap: break-word;
 }
-.Header {
+.Header-Menu {
   width: 776.87px;
   height: 303px;
   left: 252px;
-  top: 359px;
+  top: 400px;
   position: absolute;
 }
 .Menu {
   left: 0px;
   top: 123px;
-  position: absolute;
+  /* position: relative; */
   justify-content: flex-start;
   align-items: flex-start;
   gap: 84px;
   display: inline-flex;
+  /* flex-direction: column;  */
+  /* align-items: center;  */
+  /* gap: 20px;  */
 }
+
 .btnEvenement,
 .btnBilleterie,
 .btnPartenariat {
@@ -121,6 +132,17 @@
   font-weight: 700;
   word-wrap: break-word;
 }
+
+.lieu {
+  text-align: center;
+  color: #fdfdfd;
+  font-size: 27.85px;
+  font-family: Rubik;
+  font-weight: 700;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  margin-top: 20px; /* Ajoute une marge en haut pour séparer l'élément des boutons */
+}
 .Compteur {
   left: 94px;
   top: 244px;
@@ -159,27 +181,6 @@
   font-family: Black Heat Free Demo;
   font-weight: 400;
   word-wrap: break-word;
-}
-.lieu {
-  text-align: center;
-  color: #fdfdfd;
-  font-size: 27.85px;
-  font-family: Rubik;
-  font-weight: 700;
-  text-transform: uppercase;
-  word-wrap: break-word;
-}
-.backgroundMelodica {
-  width: 1280px;
-  height: 3999px;
-  position: relative;
-  background: black;
-}
-.SiteMelodica {
-  width: 1280px;
-  height: 3999px;
-  position: relative;
-  background: black;
 }
 .Intro {
   width: 1074.06px;
@@ -501,4 +502,181 @@
   font-family: Rubik;
   font-weight: 400;
   word-wrap: break-word;
+}
+/* Default styles */
+
+/* Add a CSS reset to remove default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Rest of your default styles */
+
+/* Responsive styles */
+
+/* For screens smaller than 1280px */
+@media (max-width: 1280px) {
+  .backgroundMelodica,
+  .SiteMelodica {
+    width: 100%;
+    height: auto;
+  }
+  /* Adjust other elements as necessary */
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+  .LogoMelodica {
+    width: 80%; /* Adjust as needed */
+    left: 10%; /* Adjust as needed */
+  }
+
+  .Header-Menu {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+  .Menu {
+    flex-direction: column; /* Stack menu items vertically */
+    align-items: center; /* Center align menu items */
+    gap: 20px; /* Adjust as needed */
+  }
+  .btnEvenement,
+  .btnBilleterie,
+  .btnPartenariat {
+    width: 100%;
+  }
+
+
+/* Styles pour le conteneur principal des compteurs */
+.Compteur {
+  width: 90%; 
+  left: 5%;
+  display: flex; /* Utiliser flexbox */
+  flex-direction: column; 
+}
+
+/* Styles pour les compteurs de jours et d'heures */
+.compteur_jours,
+.compteur_heures {
+  display: flex; /* Utiliser flexbox */
+  flex-direction: row; 
+  justify-content: center; 
+  gap: 10px; 
+}
+
+/* Styles pour les compteurs de minutes et de secondes */
+.compteur_minutes,
+.compteur_secondes {
+  display: flex; /* Utiliser flexbox */
+  flex-direction: row; 
+  justify-content: center; 
+  gap: 10px; 
+}
+
+/* Conteneur pour les compteurs de jours et d'heures */
+.compteurs1 {
+  display: flex; /* Utiliser flexbox */
+  flex-direction: column; 
+  align-items: center; /* Centrer les éléments horizontalement */
+}
+
+/* Conteneur pour les compteurs de minutes et de secondes */
+.compteurs2 {
+  display: flex; /* Utiliser flexbox */
+  flex-direction: column; 
+  align-items: center; /* Centrer les éléments horizontalement */
+}
+
+
+  /* .Compteur {
+    width: 90%; 
+    left: 5%;
+    flex-direction: column; 
+
+  }
+
+  .compteur_jours,
+  .compteur_heures,
+  .competeur_minutes,
+  .compteur_secondes{
+    flex-direction: row; 
+    justify-content: center; 
+    gap: 10px; 
+  } */
+
+  .Intro {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+
+  .img_Scène {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+
+  .Scène {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+
+  .HistoireFest {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+
+  .ProgrammeFEST {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+
+  .ScenesFEST {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+
+  .BoutonAchatBillet {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+
+  .Partenaires {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+
+  .PartenariatsFest {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+
+  .Footer {
+    width: 100%; /* Adjust as needed */
+    left: 0; /* Adjust as needed */
+  }
+
+  .Rectangle_footer {
+    width: 100%; /* Adjust as needed */
+    left: 0; /* Adjust as needed */
+  }
+
+  .nous_contacter,
+  .politiques,
+  .réseaux {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+
+  /* Adjust other elements as necessary */
+}
+
+/* For screens smaller than 480px */
+@media (max-width: 480px) {
+  .Intro,
+  .Footer {
+    width: 90%; /* Adjust as needed */
+    left: 5%; /* Adjust as needed */
+  }
+  /* Adjust other elements as necessary */
 }
