@@ -4,14 +4,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../hooks/useAuth';
 import { database, ref, onValue } from '../config/firebase';
-import { getAuth, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
+import { FIREBASE_AUTH } from '../config/firebase';
 
 const SettingsScreen = () => {
     const [userInfo, setUserInfo] = useState({});
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
     const { user } = useAuth();
-    const auth = getAuth();
+    const auth = FIREBASE_AUTH;
 
     useEffect(() => {
         if (user) {
@@ -31,13 +32,14 @@ const SettingsScreen = () => {
         }
     }, [user]);
 
-    const handleLogout = async () => {
-        try {
-            await signOut(auth);
-            navigation.navigate('Sign In');
-        } catch (error) {
-            console.error('Error logging out:', error.message);
-        }
+
+    const handleLogout = () => {
+        signOut(auth)
+            .then(() => {
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     const navigateToScreen = (screenName) => {
