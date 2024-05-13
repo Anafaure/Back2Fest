@@ -548,19 +548,63 @@
     width: 100%;
   }
 
-  .Compteur {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+
+/* Styles pour le conteneur principal des compteurs */
+.Compteur {
+  width: 90%; 
+  left: 5%;
+  display: flex; /* Utiliser flexbox */
+  flex-direction: column; 
+}
+
+/* Styles pour les compteurs de jours et d'heures */
+.compteur_jours,
+.compteur_heures {
+  display: flex; /* Utiliser flexbox */
+  flex-direction: row; 
+  justify-content: center; 
+  gap: 10px; 
+}
+
+/* Styles pour les compteurs de minutes et de secondes */
+.compteur_minutes,
+.compteur_secondes {
+  display: flex; /* Utiliser flexbox */
+  flex-direction: row; 
+  justify-content: center; 
+  gap: 10px; 
+}
+
+/* Conteneur pour les compteurs de jours et d'heures */
+.compteurs1 {
+  display: flex; /* Utiliser flexbox */
+  flex-direction: column; 
+  align-items: center; /* Centrer les éléments horizontalement */
+}
+
+/* Conteneur pour les compteurs de minutes et de secondes */
+.compteurs2 {
+  display: flex; /* Utiliser flexbox */
+  flex-direction: column; 
+  align-items: center; /* Centrer les éléments horizontalement */
+}
+
+
+  /* .Compteur {
+    width: 90%; 
+    left: 5%;
+    flex-direction: column; 
+
   }
 
   .compteur_jours,
   .compteur_heures,
-  .compteur_minutes,
-  .compteur_secondes {
-    flex-direction: row; /* Stack counter items horizontally */
-    justify-content: center; /* Center align counter items */
-    gap: 10px; /* Adjust as needed */
-  }
+  .competeur_minutes,
+  .compteur_secondes{
+    flex-direction: row; 
+    justify-content: center; 
+    gap: 10px; 
+  } */
 
   .Intro {
     width: 90%; /* Adjust as needed */
