@@ -143,6 +143,7 @@ body {
   font-size: 1rem;
   color: #000;
   margin: 10px 0;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
