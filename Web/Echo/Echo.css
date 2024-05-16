@@ -1,0 +1,211 @@
+/* CSS ECHO */
+
+/* Styles de base */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.SiteEcho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.LogoEch2o img {
+  max-width: 100%;
+  height: auto;
+}
+
+.Menu {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1200px;
+  color: #4bb19d;
+}
+
+.Menu div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Images */
+.Image45,
+.Image46 {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+}
+
+.Histoire_produit,
+.Partenariats_Echo,
+.Le_Produit {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px 0;
+}
+
+.Histoire_title,
+.Partenariats_title,
+.LeProduit_title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.histoire,
+.partenariats,
+.produit {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* .RectangleMelodica {
+  width: 50%;
+  height: 100px; 
+  background-color: #f0f0f0; 
+} */
+
+.Logo {
+  text-align: center;
+}
+
+.RectangleMelodica {
+  position: relative;
+  width: 50%;
+  height: 100px;
+  background-color: #f0f0f0;
+}
+
+.MelodicaViolet {
+  position: absolute;
+  left: 29px;
+  top: 50%;
+  transform: translateY(-100%);
+  text-align: center;
+  color: #560bad;
+  font-size: 2.5rem;
+  margin: 5px 0;
+  font-family: "Black Heat Free Demo", sans-serif;
+  font-weight: 400;
+  z-index: 1;
+  word-wrap: break-word;
+}
+
+.MelodicaRose {
+  position: absolute;
+  left: 30.05px;
+  top: 50%;
+  transform: translateY(-100%);
+  text-align: center;
+  color: #f72585;
+  font-size: 2.5rem;
+  margin: 5px 0;
+  font-family: "Black Heat Free Demo", sans-serif;
+  font-weight: 400;
+  z-index: 2;
+  word-wrap: break-word;
+}
+
+.Festival {
+  position: relative;
+  top: 50%;
+  text-align: center;
+  color: #121212;
+  font-size: 1rem;
+  font-family: "Black Heat Free Demo", sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.Footer {
+  width: 100%;
+  position: absolute;
+  padding: 20px;
+  background-color: #4bb19d;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.Footer .NousContacter,
+.Footer .Politiques,
+.Footer .Réseaux {
+  font-size: 1.2rem;
+  color: #000;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.Footer .Frame78,
+.Footer .Frame79,
+.Footer .Contact {
+  font-size: 1rem;
+  color: #000;
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .Footer {
+    padding: 10px;
+  }
+
+  .Footer .Contact {
+    font-size: 1rem;
+  }
+
+  .Footer .Frame78,
+  .Footer .Frame79 {
+    font-size: 0.9rem;
+  }
+}
+
+/* .Footer {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+.Footer .Contact,
+.Footer .Frame78,
+.Footer .Frame79 {
+  margin: 10px 0;
+} */
+
+/* Media Queries pour différentes tailles d'écran */
+@media (min-width: 768px) {
+  .Menu {
+    justify-content: space-between;
+  }
+
+  .Histoire_title,
+  .Partenariats_title,
+  .LeProduit_title {
+    font-size: 2.5rem;
+  }
+
+  .histoire,
+  .partenariats,
+  .produit {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .SiteEcho {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .Histoire_produit,
+  .Partenariats_Echo,
+  .Le_Produit {
+    flex: 1 1 30%;
+    margin: 20px;
+  }
+
+  .Frame88 {
+    flex: 1 1 100%;
+  }
+}
