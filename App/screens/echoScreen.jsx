@@ -60,13 +60,13 @@ function EchoScreen() {
 
     const getRewardIcon = (type) => {
         if (type === 'RedBull offerte') {
-            return 'flash-outline'; 
+            return 'flash-outline';
         } else if (type.includes('Boisson')) {
             return 'beer-outline';
         } else if (type === 'Merch offert') {
-            return 'shirt-outline'; 
+            return 'shirt-outline';
         } else {
-            return 'warning-outline'; 
+            return 'warning-outline';
         }
     };
 
