@@ -28,10 +28,10 @@ function EchoScreen() {
     const [gains, setGains] = useState([]);
     const { user } = useAuth();
     const navigation = useNavigation(); // Initialize navigation
-    
+
     const handleRouletteClick = () => setActiveTab('roulette');
     const handleGainsClick = () => setActiveTab('gains');
-    
+
     const handleCircleClick = () => {
         const randomReward = rewards[Math.floor(Math.random() * rewards.length)];
         setReward(randomReward);
