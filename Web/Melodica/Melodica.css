@@ -10,6 +10,8 @@
   position: relative;
   background: black;
 }
+/* HEADER */
+
 .Header {
   width: 100%;
   height: 711px;
@@ -19,17 +21,23 @@
   background-image: url("../Images/Concert_ombre.png");
   background-size: cover;
 }
+
 .LogoMelodica {
+  width: 75%;
+  /* max-width: 500px;  */
+  height: auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* .LogoMelodica {
   width: 938.38px;
   height: 264.83px;
-  /* padding-bottom: 0.01px; */
   left: 171px;
   top: 66.17px;
   position: absolute;
-  /* justify-content: center;
-  align-items: center;
-  display: inline-flex; */
-}
+} */
 .MelodicaViolet {
   width: 938.38px;
   height: 229.42px;
@@ -75,14 +83,10 @@
 .Menu {
   left: 0px;
   top: 123px;
-  /* position: relative; */
   justify-content: flex-start;
   align-items: flex-start;
   gap: 84px;
   display: inline-flex;
-  /* flex-direction: column;  */
-  /* align-items: center;  */
-  /* gap: 20px;  */
 }
 
 .btnEvenement,
@@ -92,8 +96,8 @@
   height: 57.44px;
   position: relative;
 }
-.Rectangle4170,
-.Rectangle4172 {
+.Rectangleevenement,
+.Rectanglepartenariat {
   width: 202.96px;
   height: 57.44px;
   left: 0px;
@@ -113,7 +117,7 @@
   font-weight: 700;
   word-wrap: break-word;
 }
-.Rectangle4171 {
+.Rectanglebilletterie {
   width: 202.96px;
   height: 57.44px;
   left: 0px;
@@ -141,17 +145,23 @@
   font-weight: 700;
   text-transform: uppercase;
   word-wrap: break-word;
-  margin-top: 20px; /* Ajoute une marge en haut pour séparer l'élément des boutons */
+  margin-top: 7%;
 }
 .Compteur {
-  left: 94px;
-  top: 244px;
-  position: absolute;
-  justify-content: flex-start;
+  left: 10%;
+  justify-content: center;
   align-items: flex-end;
-  gap: 100px;
-  display: inline-flex;
+  gap: 0.5%;
+  display: flex;
+  flex-direction: row;
+  margin-top: -5%;
 }
+.compteur1 {
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 15%;
+}
+
 .compteur_jours,
 .compteur_heures,
 .competeur_minutes,
@@ -159,19 +169,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 13px;
   display: inline-flex;
 }
+
 .nbre_jours,
 .nbre_heures,
 .nbre_minutes,
-.nbre_secondes {
-  color: white;
-  font-size: 25.53px;
-  font-family: Black Heat Free Demo;
-  font-weight: 400;
-  word-wrap: break-word;
-}
+.nbre_secondes,
 .Jours,
 .Heures,
 .Minutes,
@@ -182,6 +186,9 @@
   font-weight: 400;
   word-wrap: break-word;
 }
+
+/* BODY */
+
 .Intro {
   width: 1074.06px;
   height: 81px;
@@ -238,6 +245,7 @@
   gap: 32px;
   display: inline-flex;
 }
+
 .HistoireDuFestival {
   color: #f72585;
   font-size: 48px;
@@ -277,7 +285,7 @@
   word-wrap: break-word;
 }
 .ScenesFEST {
-  left: 530px;
+  left: 520px;
   top: 2264px;
   position: absolute;
   flex-direction: column;
@@ -286,7 +294,8 @@
   gap: 32px;
   display: inline-flex;
 }
-.Scènes {
+
+.Scènes_title {
   color: #f72585;
   font-size: 48px;
   font-family: Rubik;
@@ -307,13 +316,13 @@
   top: 2770px;
   position: absolute;
 }
-.Rectangle4173 {
+.RectangleBillet {
   width: 468px;
   height: 151px;
   left: 0px;
   top: 0px;
   position: absolute;
-  background: #560bad;
+  background: #f72585;
   border-radius: 33px;
 }
 .AcheterMonBillet {
@@ -351,83 +360,51 @@
   gap: 58px;
   display: inline-flex;
 }
-.PartenariatRedbull {
-  width: 230px;
-  height: 230px;
-  position: relative;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  display: flex;
-}
-.Rectangle4174,
-.Rectangle4177,
-.Rectangle4175,
-.Rectangle4176 {
+
+.Rectangleredbull,
+.Rectangleecho,
+.Rectanglesoundcloud,
+.Rectanglesncf {
   width: 230px;
   height: 230px;
   background: #121212;
   border-radius: 13.94px;
-}
-.RedBull {
-  width: 175.64px;
-  height: 176.64px;
-}
-.PartenariatEcho {
-  width: 230px;
-  height: 230px;
-  position: relative;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   display: flex;
-}
-.LogoEch2o {
-  width: 193.72px;
-  height: 95.48px;
-  position: relative;
-  box-shadow: 1.273131251335144px 1.273131251335144px 6.36565637588501px
-    rgba(0, 0, 0, 0.25);
-}
-.PartenariatSoundcloud {
-  width: 230px;
-  height: 230px;
-  position: relative;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  display: flex;
 }
-.SoundCloud {
-  width: 115.7px;
-  height: 121.08px;
-}
-.Soundcloud {
+
+.Soundcloud_title {
   color: #fdfdfd;
   font-size: 33.45px;
   font-family: Rubik;
   font-weight: 600;
   word-wrap: break-word;
 }
-.PartenariatSncf {
+.LogoEch2o {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.Rectangleecho {
+  position: relative;
   width: 230px;
   height: 230px;
-  position: relative;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  display: flex;
+  overflow: hidden;
 }
-.SNCF {
-  width: 201.87px;
-  height: 108.9px;
-}
+
+/* FOOTER */
+
 .Footer {
   width: 1280px;
   height: 400px;
   left: 0px;
   top: 3599px;
   position: absolute;
+  background-color: #560bad;
 }
 .Rectangle_footer {
   width: 1280px;
@@ -503,44 +480,82 @@
   font-weight: 400;
   word-wrap: break-word;
 }
-/* Default styles */
 
-/* Add a CSS reset to remove default margin and padding */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Rest of your default styles */
+/* RESPONSIVE */
 
-/* Responsive styles */
-
-/* For screens smaller than 1280px */
-@media (max-width: 1280px) {
+/* @media (max-width: 1280px) {
   .backgroundMelodica,
   .SiteMelodica {
     width: 100%;
     height: auto;
   }
-  /* Adjust other elements as necessary */
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+} */
 
-/* For screens smaller than 768px */
 @media (max-width: 768px) {
+  .backgroundMelodica,
+  .SiteMelodica {
+    width: 100%;
+    height: auto;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  /* HEADER */
   .LogoMelodica {
-    width: 80%; /* Adjust as needed */
-    left: 10%; /* Adjust as needed */
+    width: 90%;
+    left: 40%;
+    transform: translateX(-40%);
+    text-align: center;
+    font-size: 5vw;
+  }
+
+  .MelodicaViolet {
+    font-size: 20vw;
+    width: 90%;
+    left: 45%;
+    transform: translateX(-40%);
+    text-align: center;
+    margin-top: 7%;
+  }
+  .MelodicaRose {
+    font-size: 20vw;
+    width: 90%;
+    left: 46%;
+    transform: translateX(-40%);
+    text-align: center;
+    margin-top: 7.5%;
+  }
+  .Festival {
+    font-size: 5vw;
+    width: 90%;
+    left: 75%;
+    transform: translateX(-40%);
+    text-align: center;
+    margin-top: -40%;
   }
 
   .Header-Menu {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    width: 90%;
+    left: 5%;
+    margin-top: -40%;
   }
   .Menu {
-    flex-direction: column; /* Stack menu items vertically */
-    align-items: center; /* Center align menu items */
-    gap: 20px; /* Adjust as needed */
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
   .btnEvenement,
   .btnBilleterie,
@@ -548,135 +563,145 @@
     width: 100%;
   }
 
-
-/* Styles pour le conteneur principal des compteurs */
-.Compteur {
-  width: 90%; 
-  left: 5%;
-  display: flex; /* Utiliser flexbox */
-  flex-direction: column; 
-}
-
-/* Styles pour les compteurs de jours et d'heures */
-.compteur_jours,
-.compteur_heures {
-  display: flex; /* Utiliser flexbox */
-  flex-direction: row; 
-  justify-content: center; 
-  gap: 10px; 
-}
-
-/* Styles pour les compteurs de minutes et de secondes */
-.compteur_minutes,
-.compteur_secondes {
-  display: flex; /* Utiliser flexbox */
-  flex-direction: row; 
-  justify-content: center; 
-  gap: 10px; 
-}
-
-/* Conteneur pour les compteurs de jours et d'heures */
-.compteurs1 {
-  display: flex; /* Utiliser flexbox */
-  flex-direction: column; 
-  align-items: center; /* Centrer les éléments horizontalement */
-}
-
-/* Conteneur pour les compteurs de minutes et de secondes */
-.compteurs2 {
-  display: flex; /* Utiliser flexbox */
-  flex-direction: column; 
-  align-items: center; /* Centrer les éléments horizontalement */
-}
-
-
-  /* .Compteur {
-    width: 90%; 
+  .Compteur {
+    width: 90%;
     left: 5%;
-    flex-direction: column; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15%;
+  }
 
+  .compteur1 {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 15%;
+  }
+  .compteur2 {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
   .compteur_jours,
   .compteur_heures,
   .competeur_minutes,
-  .compteur_secondes{
-    flex-direction: row; 
-    justify-content: center; 
-    gap: 10px; 
-  } */
+  .compteur_secondes {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 15%;
+  }
+
+  /* BODY */
 
   .Intro {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    width: 90%;
+    left: 5%;
+    margin-top: -15%;
   }
 
   .img_Scène {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    width: 90%;
+    left: 50%;
+    top: 996;
+    transform: translateX(-50%);
   }
 
   .Scène {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    width: 90%;
+    left: 50%;
+    top: 1186;
+    transform: translateX(-40%);
+    text-align: center;
   }
 
   .HistoireFest {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    width: 90%;
+    left: 5%;
   }
 
   .ProgrammeFEST {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    width: 90%;
+    left: 5%;
   }
 
   .ScenesFEST {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    width: 90%;
+    left: 5%;
   }
 
   .BoutonAchatBillet {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    width: 70%;
+    left: 5%;
+  }
+
+  .RectangleBillet {
+    width: 70%;
+    left: 30%;
+  }
+
+  .AcheterMonBillet {
+    width: 90%;
+    left: 20%;
+    font-size: 7vw;
+    word-wrap: break-word;
+    text-align: center;
   }
 
   .Partenaires {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    width: 90%;
+    left: 5%;
   }
-
   .PartenariatsFest {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
+    width: 90%;
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
   }
 
+  /* .PartenariatRedbull,
+  .PartenariatEcho,
+  .PartenariatSoundcloud,
+  .PartenariatSncf {
+    width: 45%; 
+    height: auto; 
+    margin: 5%; 
+  } */
+
+  /* FOOTER */
+  /* 
   .Footer {
-    width: 100%; /* Adjust as needed */
-    left: 0; /* Adjust as needed */
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
   }
-
   .Rectangle_footer {
-    width: 100%; /* Adjust as needed */
-    left: 0; /* Adjust as needed */
-  }
+    width: 100%;
+    left: 0;
+    bottom: 0;
+  } */
 
-  .nous_contacter,
+  /* .nous_contacter,
   .politiques,
-  .réseaux {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
-  }
+  .réseaux,
+  .NousContacter,
+  .Politiques,
+  .Réseaux {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  } */
 
-  /* Adjust other elements as necessary */
-}
-
-/* For screens smaller than 480px */
-@media (max-width: 480px) {
-  .Intro,
-  .Footer {
-    width: 90%; /* Adjust as needed */
-    left: 5%; /* Adjust as needed */
-  }
-  /* Adjust other elements as necessary */
+  /* .Nous_contacter{
+    width: 90%;
+    left: 5%;
+    margin-top: 10%;
+  } */
 }
