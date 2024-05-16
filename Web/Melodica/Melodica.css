@@ -89,6 +89,7 @@
   align-items: flex-start;
   gap: 84px;
   display: inline-flex;
+  cursor: pointer;
 }
 
 .btnEvenement,
@@ -320,6 +321,7 @@
   left: 422px;
   top: 2770px;
   position: absolute;
+  cursor: pointer;
 }
 .RectangleBillet {
   width: 468px;
@@ -460,6 +462,7 @@
   font-family: Rubik;
   font-weight: 400;
   word-wrap: break-word;
+  cursor: pointer;
 }
 .politiques {
   width: 190px;
@@ -472,6 +475,7 @@
   font-family: Rubik;
   font-weight: 400;
   word-wrap: break-word;
+  cursor: pointer;
 }
 .réseaux {
   width: 190px;
@@ -484,6 +488,7 @@
   font-family: Rubik;
   font-weight: 400;
   word-wrap: break-word;
+  cursor: pointer;
 }
 
 * {
