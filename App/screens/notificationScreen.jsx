@@ -15,9 +15,9 @@ const NotificationScreen = () => {
 
     const switchStyle = {
         trackColor: { false: '#000', true: '#F72585' },
-        thumbColorPause: PauseEnabled ? '#2A2A2A' : '#F72585' ,
-        thumbColorStartEvent: StartEventEnabled ? '#2A2A2A' : '#F72585',
-        thumbColorNewEvent: NewEventEnabled ? '#2A2A2A' : '#F72585'
+        thumbColorPause: '#fff' ,
+        thumbColorStartEvent: '#fff',
+        thumbColorNewEvent: '#fff'
     };
 
     return (
