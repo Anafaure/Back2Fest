@@ -491,10 +491,29 @@
   cursor: pointer;
 }
 
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a /* Liens par défaut (non survolés) */
+{
+text-decoration: none;
+color: white;
+}
+a:hover /* Apparence lors du survol des liens */
+{
+text-decoration: underline;
+}
+a:focus /* Apparence lorsque le lien est sélectionné */
+{
+color: white;
+}
+a:visited /*Apparence lorsque le lien a déjà été consulté*/
+{
+background-color: white;
 }
 
 /* RESPONSIVE */
