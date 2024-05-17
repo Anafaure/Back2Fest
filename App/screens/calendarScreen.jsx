@@ -5,7 +5,7 @@ import { ref, onValue, off, database } from '../config/firebase';
 
 const EventApp = () => {
   const [events, setEvents] = useState([]);
-  const [selectedDate, setSelectedDate] = useState('05/09/2024');
+  const [selectedDate, setSelectedDate] = useState('05/07/2024');
 
   // Helper function to fetch the artist image
   const fetchArtistImage = async (artistName) => {
@@ -68,9 +68,9 @@ const EventApp = () => {
         <View>
           <View style={styles.dateSelector}>
             {[
-              ['05/09/2024', '5', 'Jeu'],
-              ['06/09/2024', '6', 'Ven'],
-              ['07/09/2024', '7', 'Sam'],
+              ['05/07/2024', '5', 'Jeu'],
+              ['06/07/2024', '6', 'Ven'],
+              ['07/07/2024', '7', 'Sam'],
             ].map((date) => (
               <TouchableOpacity
                 key={date[0]}
