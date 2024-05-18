@@ -7,7 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 const HelpScreen = () => {
     const navigation = useNavigation();
     return (
-        <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
             <View style={styles.mainContainer}>
                 <View style={styles.circleContainer}>
             <TouchableOpacity

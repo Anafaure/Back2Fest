@@ -178,7 +178,8 @@ const EventApp = () => {
           <Text style={styles.headerText}>Programme</Text>
         </View>
       </View>
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
         {events.map((event, index) => (
           <View key={index} style={styles.eventCard}>
             <View style={styles.timeLine}>
@@ -238,6 +239,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 22,
     fontWeight: "bold",
+    marginLeft: "5%",
   },
   dateSelector: {
     flexDirection: "row",

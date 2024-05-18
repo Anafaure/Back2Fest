@@ -51,7 +51,6 @@ const EditUserDataScreen = () => {
 
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.contentContainer}>
                 <View style={styles.headerContainer}>
                     <TouchableOpacity
                         style={styles.backButton}
@@ -61,6 +60,8 @@ const EditUserDataScreen = () => {
                     </TouchableOpacity>
                     <Text style={styles.headerTitle}>Informations personnelles</Text>
                 </View>
+            <ScrollView style={styles.contentContainer} showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
                 
                 <View style={styles.fieldContainer}>
                     <Text style={styles.label}>Prénom</Text>
