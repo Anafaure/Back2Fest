@@ -1,29 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { ref, onValue, off, database } from '../config/firebase';
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { ref, onValue, update, remove } from "firebase/database";
+import { getAuth } from "firebase/auth";
+import { database } from "../config/firebase";
 
 const EventApp = () => {
   const [events, setEvents] = useState([]);
-  const [selectedDate, setSelectedDate] = useState('05/07/2024');
+  const [selectedDate, setSelectedDate] = useState("05/07/2024");
+  const [followingArtists, setFollowingArtists] = useState({});
+
+  const auth = getAuth();
+  const user = auth.currentUser;
 
   // Helper function to fetch the artist image
   const fetchArtistImage = async (artistName) => {
     return new Promise((resolve) => {
       const artistRef = ref(database, `/artistes/${artistName}`);
-      onValue(artistRef, (snapshot) => {
-        const artistData = snapshot.val();
-        resolve(artistData?.image || 'https://via.placeholder.com/69x69');
-      }, {
-        onlyOnce: true, // Stop listening after receiving the data
-      });
+      onValue(
+        artistRef,
+        (snapshot) => {
+          const artistData = snapshot.val();
+          resolve(artistData?.image || "https://via.placeholder.com/69x69");
+        },
+        {
+          onlyOnce: true, // Stop listening after receiving the data
+        }
+      );
     });
   };
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const eventsRef = ref(database, '/concert');
+        const eventsRef = ref(database, "/concert");
         const snapshot = await new Promise((resolve) =>
           onValue(eventsRef, resolve, { onlyOnce: true })
         );
@@ -33,12 +50,14 @@ const EventApp = () => {
           let eventArray = Object.values(eventData);
 
           // Filter events by selected date
-          eventArray = eventArray.filter((event) => event.date === selectedDate);
+          eventArray = eventArray.filter(
+            (event) => event.date === selectedDate
+          );
 
           // Sort filtered events by start time
           eventArray.sort((a, b) => {
-            const timeA = a.heure_debut.split(':').map(Number);
-            const timeB = b.heure_debut.split(':').map(Number);
+            const timeA = a.heure_debut.split(":").map(Number);
+            const timeB = b.heure_debut.split(":").map(Number);
             return timeA[0] - timeB[0] || timeA[1] - timeB[1];
           });
 
@@ -55,12 +74,71 @@ const EventApp = () => {
           setEvents([]);
         }
       } catch (error) {
-        console.error('Error fetching events:', error);
+        console.error("Error fetching events:", error);
       }
     };
 
     fetchEvents();
   }, [selectedDate]);
+
+  useEffect(() => {
+    if (user) {
+      const followRef = ref(database, `/user/${user.uid}/following`);
+      onValue(followRef, (snapshot) => {
+        const followingData = snapshot.val() || {};
+        setFollowingArtists(followingData);
+      });
+    }
+  }, [user]);
+
+  const handleFollow = (artistName, artistNom) => {
+    if (user) {
+      const followRef = ref(
+        database,
+        `/user/${user.uid}/following/${artistName}`
+      );
+      update(followRef, {
+        artistName: artistNom,
+        followedAt: new Date().toISOString(),
+      })
+        .then(() => {
+          setFollowingArtists((prev) => ({
+            ...prev,
+            [artistName]: {
+              artistName: artistNom,
+              followedAt: new Date().toISOString(),
+            },
+          }));
+        })
+        .catch((error) => {
+          console.error("Error updating follow status: ", error);
+        });
+    } else {
+      console.error("No user logged in");
+    }
+  };
+
+  const handleUnfollow = (artistName) => {
+    if (user) {
+      const followRef = ref(
+        database,
+        `/user/${user.uid}/following/${artistName}`
+      );
+      remove(followRef)
+        .then(() => {
+          setFollowingArtists((prev) => {
+            const updated = { ...prev };
+            delete updated[artistName];
+            return updated;
+          });
+        })
+        .catch((error) => {
+          console.error("Error removing follow status: ", error);
+        });
+    } else {
+      console.error("No user logged in");
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -68,19 +146,29 @@ const EventApp = () => {
         <View>
           <View style={styles.dateSelector}>
             {[
-              ['05/07/2024', '5', 'Jeu'],
-              ['06/07/2024', '6', 'Ven'],
-              ['07/07/2024', '7', 'Sam'],
+              ["05/07/2024", "5", "Jeu"],
+              ["06/07/2024", "6", "Ven"],
+              ["07/07/2024", "7", "Sam"],
             ].map((date) => (
               <TouchableOpacity
                 key={date[0]}
                 style={styles.dateBox}
                 onPress={() => setSelectedDate(date[0])}
               >
-                <Text style={[styles.dateText, selectedDate === date[0] && { color: '#F72585' }]}>
+                <Text
+                  style={[
+                    styles.dateText,
+                    selectedDate === date[0] && { color: "#F72585" },
+                  ]}
+                >
                   {date[1]}
                 </Text>
-                <Text style={[styles.dateText, selectedDate === date[0] && { color: '#F72585' }]}>
+                <Text
+                  style={[
+                    styles.dateText,
+                    selectedDate === date[0] && { color: "#F72585" },
+                  ]}
+                >
                   {date[2]}
                 </Text>
               </TouchableOpacity>
@@ -101,12 +189,29 @@ const EventApp = () => {
             <Image source={{ uri: event.image }} style={styles.eventImage} />
             <View style={styles.eventDetails}>
               <View>
-              <Text style={styles.artist}>{event.artiste}</Text>
-              <Text style={styles.duration}>{`${event.heure_debut} - ${event.heure_fin}`}</Text>
-              <Text style={styles.scene}>{`Scene ${event.scene}`}</Text>
+                <Text style={styles.artist}>{event.artiste}</Text>
+                <Text
+                  style={styles.duration}
+                >{`${event.heure_debut} - ${event.heure_fin}`}</Text>
+                <Text style={styles.scene}>{`Scene ${event.scene}`}</Text>
               </View>
-              <TouchableOpacity>
-                <Ionicons name="heart-outline" size={24} color="black" />
+              <TouchableOpacity
+                onPress={() => {
+                  const isFollowing = followingArtists[event.artiste];
+                  if (isFollowing) {
+                    handleUnfollow(event.artiste);
+                  } else {
+                    handleFollow(event.artiste, event.artiste);
+                  }
+                }}
+              >
+                <Ionicons
+                  name={
+                    followingArtists[event.artiste] ? "heart" : "heart-outline"
+                  }
+                  size={24}
+                  color={followingArtists[event.artiste] ? "red" : "black"}
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -119,53 +224,53 @@ const EventApp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: "#121212",
   },
   header: {
     paddingTop: 50,
     paddingBottom: 20,
-    backgroundColor: '#121212',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    backgroundColor: "#121212",
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   headerText: {
-    color: 'white',
+    color: "white",
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   dateSelector: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
     paddingHorizontal: 20,
   },
   dateBox: {
     padding: 10,
-    backgroundColor: '#121212',
-    alignItems: 'center',
+    backgroundColor: "#121212",
+    alignItems: "center",
     borderRadius: 10,
   },
   dateText: {
-    color: 'white',
+    color: "white",
     fontSize: 25,
   },
   eventCard: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    backgroundColor: "white",
     marginHorizontal: 20,
     marginVertical: 10,
     borderRadius: 10,
     padding: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   timeLine: {
     paddingRight: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   time: {
     fontSize: 16,
-    color: 'grey',
+    color: "grey",
   },
   eventImage: {
     width: 50,
@@ -175,21 +280,21 @@ const styles = StyleSheet.create({
   eventDetails: {
     flex: 1,
     paddingHorizontal: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   artist: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   duration: {
     fontSize: 12,
-    color: 'grey',
+    color: "grey",
   },
   scene: {
     fontSize: 12,
-    color: 'grey',
+    color: "grey",
   },
 });
 
