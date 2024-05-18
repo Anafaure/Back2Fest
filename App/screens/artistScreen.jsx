@@ -109,7 +109,8 @@ const ArtistScreen = () => {
                 </TouchableOpacity>
                 <Text style={styles.artistName}>{artist.nom}</Text>
             </View>
-            <ScrollView>
+            <ScrollView width="100%" showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
                 <Image
                     style={styles.artistImage}
                     source={{ uri: artist.image }}

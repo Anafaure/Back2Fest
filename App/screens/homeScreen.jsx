@@ -42,7 +42,8 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={responsiveStyles.scrollContainer}>
+      <ScrollView contentContainerStyle={responsiveStyles.scrollContainer} showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
         <Text style={responsiveStyles.title}>Raccourcis</Text>
         <View style={responsiveStyles.sosmap}>
           <View style={responsiveStyles.sosContainer}>
@@ -57,7 +58,8 @@ export default function HomeScreen() {
         </View>
         <Text style={responsiveStyles.title}>Aujourd'hui</Text>
         <Text style={responsiveStyles.subtitle}>Artistes</Text>
-        <ScrollView horizontal>
+        <ScrollView horizontal showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
           {artists.map((artist, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Artist', { artistName: artist.artistName })}>
               <View style={responsiveStyles.card}>
@@ -72,7 +74,8 @@ export default function HomeScreen() {
         </ScrollView>
 
         <Text style={responsiveStyles.subtitle}>Activités</Text>
-        <ScrollView horizontal>
+        <ScrollView horizontal showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
           {artists.map((artist, index) => (
             <TouchableOpacity key={index} >
               <View style={responsiveStyles.card}>

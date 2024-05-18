@@ -152,7 +152,8 @@ function EchoScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
                 <View style={styles.header}>
                     <View style={styles.headerTitleContainer}>
                         <Image
@@ -199,7 +200,7 @@ function EchoScreen() {
                 </View>
 
                 <Text style={styles.mainTitle}>Vos achats</Text>
-                <View>
+                <View style={styles.shopContainer}>
                     <FlatList
                         style={styles.shop}
                         data={items}
@@ -242,7 +243,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#121212',
         alignItems: 'center',
-        padding: 26,
+        // padding: 26,
     },
     header: {
         flexDirection: 'row',
@@ -270,6 +271,7 @@ const styles = StyleSheet.create({
         fontSize: 36,
         color: '#FDFDFD',
         marginBottom: 20,
+        marginLeft:"5%"
     },
     options: {
         flexDirection: 'row',
@@ -375,6 +377,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 20,
         alignContent: 'center',
+        alignSelf: 'center',
     },
     modalContainer: {
         flex: 1,
@@ -385,6 +388,9 @@ const styles = StyleSheet.create({
     video: {
         width: 300,
         height: 300,
+    },
+    shopContainer: {
+        alignSelf: 'center',
     },
 });
 

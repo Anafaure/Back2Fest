@@ -9,10 +9,6 @@ const PrivacyPolicyScreen = () => {
 
     return (
         <View style={styles.container}>
-            {loading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
-            ) : (
-                <ScrollView style={styles.contentContainer}>
                     <View style={styles.headerContainer}>
                         <TouchableOpacity
                             style={styles.backButton}
@@ -22,6 +18,8 @@ const PrivacyPolicyScreen = () => {
                         </TouchableOpacity>
                         <Text style={styles.headerTitle}>Politique de confidentialité</Text>
                     </View>
+                <ScrollView style={styles.contentContainer} showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
                     <Text style={styles.textHeader}>Dernière mise à jour : 29 avril 2024</Text>
                     {/* You can place additional sections or options here */}
                     <Text style={styles.textContent}>La présente Politique de confidentialité décrit comment les informations personnelles sont collectées, utilisées et partagées lorsque vous utilisez l'application mobile Mélodica et les gourdes géolocalisables associées.</Text>
@@ -51,7 +49,7 @@ Nous pouvons partager vos informations personnelles avec des tiers lorsque vous 
                     <Text style={styles.textContent}>Pour plus d'informations sur nos pratiques en matière de confidentialité, ou si vous avez des questions ou des préoccupations, veuillez nous contacter par e-mail à l'adresse suivante : contact@festivalgo.com.</Text>
 
                 </ScrollView>
-            )}
+       
         </View>
     );
 };
