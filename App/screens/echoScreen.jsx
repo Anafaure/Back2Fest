@@ -1,10 +1,11 @@
-import React, { useEffect, useState} from 'react';
-import { View, Text, StyleSheet, Image, SafeAreaView, TouchableOpacity, Modal, Button, FlatList, ScrollView } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, Text, StyleSheet, Image, SafeAreaView, TouchableOpacity, Alert, FlatList, ScrollView, Modal } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { database, ref, onValue, push } from '../config/firebase';
 import { useAuth } from '../hooks/useAuth';
-import { useNavigation } from '@react-navigation/native'; // Import the navigation hook
-
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Video } from 'expo-av'; // Import Video from expo-av
 
 const rewards = [
     { type: 'Boisson 1€', utilise: 'non' },
@@ -23,24 +24,47 @@ const items = [
 
 function EchoScreen() {
     const [activeTab, setActiveTab] = useState('roulette');
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const [reward, setReward] = useState(null);
     const [gains, setGains] = useState([]);
     const { user } = useAuth();
-    const navigation = useNavigation(); // Initialize navigation
+    const navigation = useNavigation();
+    const [modalVisible, setModalVisible] = useState(false);
+    const videoPlayer = useRef(null);
 
     const handleRouletteClick = () => setActiveTab('roulette');
     const handleGainsClick = () => setActiveTab('gains');
 
-    const handleCircleClick = () => {
+    const handleCircleClick = async () => {
+        const lastSpinDate = await AsyncStorage.getItem('lastSpinDate');
+        const today = new Date().toISOString().split('T')[0];
+
+        if (lastSpinDate === today) {
+            Alert.alert('Attention', 'Vous avez déjà utilisé la roulette aujourd\'hui.');
+            return;
+        }
+
+        setModalVisible(true);
+    };
+
+    const onVideoEnd = async () => {
+        setModalVisible(false);
+
         const randomReward = rewards[Math.floor(Math.random() * rewards.length)];
         setReward(randomReward);
-        setIsModalVisible(true);
+        Alert.alert(
+            'Récompense',
+            `Récompense : ${randomReward.type}`,
+            [{ text: 'Fermer', onPress: () => {} }],
+            { cancelable: true }
+        );
 
         if (user && randomReward.type !== 'Perdu') {
             const gainsRef = ref(database, `user/${user.uid}/gains`);
             push(gainsRef, randomReward);
         }
+
+        const today = new Date().toISOString().split('T')[0];
+        await AsyncStorage.setItem('lastSpinDate', today);
     };
 
     useEffect(() => {
@@ -165,28 +189,15 @@ function EchoScreen() {
                             <Text style={styles.optionText}>Mes gains ({gains.length})</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate('Help')} style={styles.optionQuestionMark}>
-    <View>
-        <Text style={styles.optionQuestionMarkText}>?</Text>
-    </View>
-</TouchableOpacity>
+                            <View>
+                                <Text style={styles.optionQuestionMarkText}>?</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
 
                     {renderContent()}
                 </View>
 
-                <Modal
-                    visible={isModalVisible}
-                    transparent={true}
-                    animationType="slide"
-                    onRequestClose={() => setIsModalVisible(false)}
-                >
-                    <View style={styles.modalContainer}>
-                        <View style={styles.modalContent}>
-                            <Text style={styles.modalText}>Récompense : {reward?.type || 'Perdu'}</Text>
-                            <Button title="Fermer" onPress={() => setIsModalVisible(false)} />
-                        </View>
-                    </View>
-                </Modal>
                 <Text style={styles.mainTitle}>Vos achats</Text>
                 <View>
                     <FlatList
@@ -200,6 +211,28 @@ function EchoScreen() {
                     />
                 </View>
             </ScrollView>
+
+            <Modal
+                visible={modalVisible}
+                transparent={true}
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <View style={styles.modalContainer}>
+                    <Video
+                        ref={videoPlayer}
+                        source={require('../assets/roueAnimee.mp4')}
+                        style={styles.video}
+                        resizeMode="cover"
+                        shouldPlay={true} // Ensure the video starts playing automatically
+                        onPlaybackStatusUpdate={(status) => {
+                            if (status.didJustFinish) {
+                                onVideoEnd();
+                            }
+                        }}
+                        repeat={false}
+                    />
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 }
@@ -318,22 +351,6 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 18,
     },
-    modalContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#560BAD',
-    },
-    modalContent: {
-        backgroundColor: 'white',
-        padding: 20,
-        borderRadius: 10,
-        alignItems: 'center',
-    },
-    modalText: {
-        fontSize: 20,
-        marginBottom: 10,
-    },
     itemCard: {
         flexDirection: 'column',
         width: '45%',
@@ -351,14 +368,24 @@ const styles = StyleSheet.create({
     itemImage: {
         width: 100,
         height: 100,
-        borderRadius: 50, // Adjust if necessary
+        borderRadius: 50,
     },
-    shop:{
+    shop: {
         width: '100%',
         marginTop: 10,
         marginBottom: 20,
         alignContent: 'center',
-    }
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    },
+    video: {
+        width: 300,
+        height: 300,
+    },
 });
 
 export default EchoScreen;
