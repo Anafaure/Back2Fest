@@ -14,71 +14,84 @@ export default function MapScreen() {
     }
   };
 
-  return (
-    <View style={{flex: 1,backgroundColor:"#121212"}}>
-    <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <Text style={styles.header}>Carte</Text>
-      {/* Action Buttons */}
-      <ScrollView horizontal contentContainerStyle={styles.actionButtonsContainer}>
-        <ActionButton
-          label="Scènes"
-          selected={selectedButton === "Scènes"}
-          onPress={() => handleButtonClick("Scènes")}
-        />
-        <ActionButton
-          label="Restauration"
-          selected={selectedButton === "Restauration"}
-          onPress={() => handleButtonClick("Restauration")}
-        />
-        <ActionButton
-          label="Toilettes"
-          selected={selectedButton === "Toilettes"}
-          onPress={() => handleButtonClick("Toilettes")}
-        />
-        <ActionButton
-          label="Poubelles"
-          selected={selectedButton === "Poubelles"}
-          onPress={() => handleButtonClick("Poubelles")}
-        />
-        <ActionButton
-          label="Parking"
-          selected={selectedButton === "Parking"}
-          onPress={() => handleButtonClick("Parking")}
-        />
-        <ActionButton
-          label="Camping"
-          selected={selectedButton === "Camping"}
-          onPress={() => handleButtonClick("Camping")}
-        />
-        <ActionButton
-          label="Staff"
-          selected={selectedButton === "Staff"}
-          onPress={() => handleButtonClick("Staff")}
-        />
-        {/* Add other buttons similarly */}
-      </ScrollView>
-      <View style={styles.mapContainer}>
-        <Image
-          style={{ width: 400 }}
-          source={require('../assets/map.png')}
-        />
-      </View>
-      <Text style={styles.legendText}>Légende:</Text>
-      <View style={styles.legend}>
- 
-  {/* Each LegendItem becomes a grid item */}
-  <LegendItem color="#00FAFA" label="Scènes" />
-  <LegendItem color="#FF0000" label="Restaurants / bars" />
-  <LegendItem color="#ADFF00" label="Poubelles" />
-  <LegendItem color="#FF9900" label="Toilettes" />
-  <LegendItem color="#0500FF" label="Staff" />
-  <LegendItem color="#FF008A" label="Parking" />
-  <LegendItem color="#30A92D" label="Camping" />
-  <LegendItem color="#803244" label="Infrastructures staff" />
-</View>
+  // Determine the map image source based on the selected button
+  const getMapImageSource = () => {
+    switch (selectedButton) {
+      case 'Scènes':
+        return require('../assets/maps/map_scenes.png');
+      case 'Restauration':
+        return require('../assets/maps/map_restaurant.png');
+      case 'Toilettes':
+        return require('../assets/maps/map_toilettes.png');
+      case 'Poubelles':
+        return require('../assets/maps/map_poubelles.png');
+      case 'Camping':
+        return require('../assets/maps/map_camping.png');
+      case 'Staff':
+        return require('../assets/maps/map_staff.png');
+      default:
+        return require('../assets/maps/map.png');
+    }
+  };
 
-    </SafeAreaView>
+  return (
+    <View style={{flex: 1, backgroundColor:"#121212"}}>
+      <SafeAreaView style={styles.container}>
+        {/* Header */}
+        <Text style={styles.header}>Carte</Text>
+        {/* Action Buttons */}
+        <ScrollView horizontal contentContainerStyle={styles.actionButtonsContainer}>
+          <ActionButton
+            label="Scènes"
+            selected={selectedButton === "Scènes"}
+            onPress={() => handleButtonClick("Scènes")}
+          />
+          <ActionButton
+            label="Restauration"
+            selected={selectedButton === "Restauration"}
+            onPress={() => handleButtonClick("Restauration")}
+          />
+          <ActionButton
+            label="Toilettes"
+            selected={selectedButton === "Toilettes"}
+            onPress={() => handleButtonClick("Toilettes")}
+          />
+          <ActionButton
+            label="Poubelles"
+            selected={selectedButton === "Poubelles"}
+            onPress={() => handleButtonClick("Poubelles")}
+          />
+          <ActionButton
+            label="Camping"
+            selected={selectedButton === "Camping"}
+            onPress={() => handleButtonClick("Camping")}
+          />
+          <ActionButton
+            label="Staff"
+            selected={selectedButton === "Staff"}
+            onPress={() => handleButtonClick("Staff")}
+          />
+          {/* Add other buttons similarly */}
+        </ScrollView>
+        <View style={styles.mapContainer}>
+          <Image
+            style={{ width: 400, height: 400 }}
+            source={getMapImageSource()}
+            resizeMode='contain'
+          />
+        </View>
+        <Text style={styles.legendText}>Légende:</Text>
+        <View style={styles.legend}>
+          {/* Each LegendItem becomes a grid item */}
+          <LegendItem color="#00FAFA" label="Scènes" />
+          <LegendItem color="#FF0000" label="Restaurants / bars" />
+          <LegendItem color="#ADFF00" label="Poubelles" />
+          <LegendItem color="#FF9900" label="Toilettes" />
+          <LegendItem color="#0500FF" label="Staff" />
+          <LegendItem color="#30A92D" label="Camping" />
+          <LegendItem color="#803244" label="Infrastructures staff" />
+        </View>
+      </SafeAreaView>
     </View>
   );
 }
