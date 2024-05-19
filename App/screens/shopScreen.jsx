@@ -14,42 +14,62 @@ import { useNavigation } from "@react-navigation/native";
 
 const items = [
   {
-    "name": "Coca-Cola (Canette)",
-    "price": "1.50€",
-    "image": require("../assets/Coca-Cola.png"),
-    "category": "Boissons",
+    name: "Coca-Cola (Canette)",
+    price: "1.50€",
+    image: require("../assets/Coca-Cola.png"),
+    category: "Boissons",
   },
   {
-    "name": "Lays (Chips)",
-    "price": "4€",
-    "image": require("../assets/chips.png"),
-    "category": "Snacks",
+    name: "Lays (Chips)",
+    price: "4€",
+    image: require("../assets/chips.png"),
+    category: "Snacks",
   },
   {
-    "name": "Sandwich",
-    "price": "7€",
-    "image": require("../assets/sandwich.png"),
-    "category": "Sandwichs",
+    name: "Sandwich",
+    price: "7€",
+    image: require("../assets/sandwich.png"),
+    category: "Sandwichs",
   },
   {
-    "name": "Desperados (Bière)",
-    "price": "2€",
-    "image": require("../assets/biere.png"),
-    "category": "Alcools",
+    name: "Desperados (Bière)",
+    price: "1,50€",
+    image: require("../assets/biere.png"),
+    category: "Alcools",
   },
   {
-    "name": "Frites",
-    "price": "2€",
-    "image": require("../assets/frites.png"),
-    "category": "Snacks",
+    name: "Frites",
+    price: "2€",
+    image: require("../assets/frites.png"),
+    category: "Snacks",
   },
   {
-    "name": "Burger",
-    "price": "4€",
-    "image": require("../assets/burger.png"),
-    "category": "Sandwichs",
+    name: "Burger",
+    price: "4€",
+    image: require("../assets/burger.png"),
+    category: "Sandwichs",
   },
 ];
+
+function renderItems(item, navigation) {
+  return (
+    <TouchableOpacity
+      style={styles.itemCard}
+      onPress={() => navigation.navigate("Product", { item })}
+    >
+      <View>
+        <Image
+          source={item.image}
+          style={styles.itemImage}
+          resizeMode="contain"
+        />
+        <Text style={styles.itemText}>
+          {item.name} - {item.price}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
 
 const ShopScreen = () => {
   const [selectedButton, setSelectedButton] = useState(null);
@@ -69,24 +89,6 @@ const ShopScreen = () => {
     }
   };
 
-  const renderItems = ({ item }) => (
-    <TouchableOpacity
-      style={styles.itemCard}
-      onPress={() => navigation.navigate("Product", { item })}
-    >
-      <View>
-        <Image
-          source={item.image}
-          style={styles.itemImage}
-          resizeMode="contain"
-        />
-        <Text style={styles.itemText}>
-          {item.name} - {item.price}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
-
   return (
     <View style={{ flex: 1, backgroundColor: "#121212" }}>
       <SafeAreaView style={styles.container}>
@@ -100,7 +102,7 @@ const ShopScreen = () => {
           <Text style={styles.headerTitle}>Boutique</Text>
           <View style={styles.headerIcon}>
             <TouchableOpacity onPress={() => navigation.navigate("Basket")}>
-              <Ionicons name="basket-outline" size={24} color="white" />
+              <Ionicons name="basket-outline" size={24} color="white"/>
             </TouchableOpacity>
           </View>
         </View>
@@ -133,7 +135,7 @@ const ShopScreen = () => {
           style={styles.shop}
           data={filteredItems}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={renderItems}
+          renderItem={({ item }) => renderItems(item, navigation)}
           ListEmptyComponent={
             <Text style={styles.noInfoText}>Aucun achat disponible</Text>
           }
