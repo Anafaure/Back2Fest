@@ -9,10 +9,7 @@ const SecurityScreen = () => {
 
     return (
         <View style={styles.container}>
-            {loading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
-            ) : (
-                <ScrollView style={styles.contentContainer}>
+ 
                     <View style={styles.headerContainer}>
                         <TouchableOpacity
                             style={styles.backButton}
@@ -22,6 +19,8 @@ const SecurityScreen = () => {
                         </TouchableOpacity>
                         <Text style={styles.headerTitle}>Mot de passe et sécurité</Text>
                     </View>
+                <ScrollView style={styles.contentContainer} showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
                     <View style={styles.sectionContainer}>
                         <MenuOption
                             iconName="key"
@@ -33,7 +32,7 @@ const SecurityScreen = () => {
                         />
                         </View>
                 </ScrollView>
-            )}
+   
         </View>
     );
 };

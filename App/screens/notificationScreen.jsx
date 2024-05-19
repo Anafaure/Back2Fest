@@ -15,20 +15,21 @@ const NotificationScreen = () => {
 
     const switchStyle = {
         trackColor: { false: '#000', true: '#F72585' },
-        thumbColorPause: PauseEnabled ? '#2A2A2A' : '#F72585' ,
-        thumbColorStartEvent: StartEventEnabled ? '#2A2A2A' : '#F72585',
-        thumbColorNewEvent: NewEventEnabled ? '#2A2A2A' : '#F72585'
+        thumbColorPause: '#fff' ,
+        thumbColorStartEvent: '#fff',
+        thumbColorNewEvent: '#fff'
     };
 
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.contentContainer}>
                 <View style={styles.headerContainer}>
                     <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                         <Ionicons name="arrow-back" size={30} color="white" />
                     </TouchableOpacity>
                     <Text style={styles.headerTitle}>Notifications</Text>
                 </View>
+            <ScrollView style={styles.contentContainer} showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
 
                 <View style={styles.sectionContainer}>
                     <Text style={styles.sectionTitle}>Mode pause</Text>

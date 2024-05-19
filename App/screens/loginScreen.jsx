@@ -22,12 +22,15 @@ function SignInScreen({ navigation }) {
     error: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
   async function signIn() {
     if (value.email === "" || value.password === "") {
       setValue({
         ...value,
         error: "Email and password are mandatory.",
       });
+      alert("Un email et un mot de passe sont requis.");
       return;
     }
 
@@ -38,11 +41,12 @@ function SignInScreen({ navigation }) {
         ...value,
         error: error.message,
       });
+      alert("Email ou mot de passe incorrect(s).");
     }
   }
 
   return (
-    <ImageBackground source={background} style={styles.background}>
+    <ImageBackground source={background} style={styles.background} blurRadius={2}> 
       <View style={styles.container}>
         <Image
           source={logo}
@@ -65,11 +69,19 @@ function SignInScreen({ navigation }) {
             <View style={styles.inputContainer}>
               <Icon style={styles.icon} name="lock" size={18} color="gray" />
               <TextInput
-                placeholder="Password"
+                placeholder="Mot de passe"
                 style={styles.input}
                 onChangeText={(text) => setValue({ ...value, password: text })}
-                secureTextEntry={true}
+                secureTextEntry={!showPassword}
               />
+              <Pressable onPress={() => setShowPassword(!showPassword)}>
+                <Icon
+                  name={showPassword ? "eye-off" : "eye"}
+                  size={18}
+                  color="gray"
+                  style={styles.icon}
+                />
+              </Pressable>
             </View>
           </View>
           <Pressable style={styles.button} onPress={signIn}>
@@ -77,9 +89,9 @@ function SignInScreen({ navigation }) {
           </Pressable>
         </View>
         <Text style={styles.bottomText}>
-          Pas de compte ?
+          Pas de compte ? {" "}
           <Text style={styles.linkText} onPress={() => navigation.navigate("Sign Up")}>
-            Inscrit toi ici
+            Inscris toi ici
           </Text>
         </Text>
       </View>
@@ -100,6 +112,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 24,
+    flex: 1,
   },
   title: {
     fontSize: 24,
@@ -116,7 +129,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     backgroundColor: "#f3f3f3",
     marginBottom: 16,
-    width: "100%",
+    width: "120%",
+    alignSelf: "center",
   },
   icon: {
     padding: 10,

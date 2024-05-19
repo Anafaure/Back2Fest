@@ -11,7 +11,8 @@ const LostPropertyScreen = () => {
             {loading ? (
                 <ActivityIndicator size="large" color="#0000ff" />
             ) : (
-                <ScrollView style={styles.contentContainer}>
+                <ScrollView style={styles.contentContainer} showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
                     <View style={styles.headerContainer}>
                         <TouchableOpacity
                             style={styles.backButton}

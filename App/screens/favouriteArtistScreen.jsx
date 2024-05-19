@@ -8,10 +8,8 @@ const FavouriteArtistScreen = () => {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            {loading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
-            ) : (
-                <ScrollView style={styles.contentContainer}>
+   
+   
                     <View style={styles.headerContainer}>
                         <TouchableOpacity
                             style={styles.backButton}
@@ -21,9 +19,12 @@ const FavouriteArtistScreen = () => {
                         </TouchableOpacity>
                         <Text style={styles.headerTitle}>Mes artistes préférés</Text>
                     </View>
+                <ScrollView style={styles.contentContainer} showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
                     {/* You can place additional sections or options here */}
                 </ScrollView>
-            )}
+       
+       
         </View>
     );
 };

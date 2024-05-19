@@ -109,6 +109,8 @@ const ShopScreen = () => {
         <ScrollView
           horizontal
           contentContainerStyle={styles.actionButtonsContainer}
+          showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
         >
           <ActionButton
             label="Boissons"

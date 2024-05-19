@@ -1,287 +1,212 @@
+/* CSS ECHO */
+
+/* Styles de base */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 .SiteEcho {
-  width: 1280px;
-  height: 3273px;
-  position: relative;
-  background: #fdfdfd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
-.LogoEch2o {
-  width: 304.32px;
-  height: 150px;
-  left: 488px;
-  top: 33px;
-  position: absolute;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+
+.LogoEch2o img {
+  max-width: 100%;
+  height: auto;
 }
+
 .Menu {
-  width: 742px;
-  left: 269px;
-  top: 226px;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  gap: 100px;
-  display: inline-flex;
-}
-.Produits {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1200px;
   color: #4bb19d;
-  font-size: 20px;
-  font-family: Rubik;
-  font-weight: 700;
-  word-wrap: break-word;
 }
-.Evenement {
-  color: #4bb19d;
-  font-size: 20px;
-  font-family: Rubik;
-  font-weight: 700;
-  word-wrap: break-word;
+
+.Menu div {
+  padding: 10px;
+  cursor: pointer;
 }
-.Partenariat {
-  color: #4bb19d;
-  font-size: 20px;
-  font-family: Rubik;
-  font-weight: 700;
-  word-wrap: break-word;
-}
-.Image45 {
-  width: 1285px;
-  height: 537px;
-  left: 0px;
-  top: 323px;
-  position: absolute;
-}
+
+/* Images */
+.Image45,
 .Image46 {
-  width: 600px;
-  height: 562px;
-  left: 40px;
-  top: 1279px;
-  position: absolute;
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
 }
-.Histoire_produit {
-  left: 257px;
-  top: 916px;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 35px;
-  display: inline-flex;
-}
-.Histoire {
-  color: black;
-  font-size: 48px;
-  font-family: Rubik;
-  font-weight: 600;
-  word-wrap: break-word;
-}
-.histoire {
-  color: black;
-  font-size: 16px;
-  font-family: Rubik;
-  font-weight: 400;
-  word-wrap: break-word;
-}
-.Partenariats_Echo {
-  height: 301px;
-  left: 40px;
-  top: 2022px;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 35px;
-  display: inline-flex;
-}
-.Partenariats {
-  color: black;
-  font-size: 48px;
-  font-family: Rubik;
-  font-weight: 600;
-  word-wrap: break-word;
-}
-.partenariats {
-  width: 1167px;
-  color: black;
-  font-size: 16px;
-  font-family: Rubik;
-  font-weight: 400;
-  word-wrap: break-word;
-}
+
+.Histoire_produit,
+.Partenariats_Echo,
 .Le_Produit {
-  left: 698px;
-  top: 1311px;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 35px;
-  display: inline-flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px 0;
 }
-.LeProduit {
-  color: black;
-  font-size: 48px;
-  font-family: Rubik;
-  font-weight: 600;
-  word-wrap: break-word;
+
+.Histoire_title,
+.Partenariats_title,
+.LeProduit_title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 10px;
 }
+
+.histoire,
+.partenariats,
 .produit {
-  width: 569px;
-  height: 436px;
-  color: black;
-  font-size: 16px;
-  font-family: Rubik;
-  font-weight: 400;
-  word-wrap: break-word;
+  font-size: 1rem;
+  line-height: 1.5;
 }
-.Frame88,
-.Frame89 {
-  width: 420px;
-  height: 235px;
-  position: relative;
-}
-.Rectangle4178,
-.Rectangle4178 {
-  width: 420px;
-  height: 219px;
-  left: 0px;
-  top: 0px;
-  position: absolute;
-  background: #fdfdfd;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 22.79px;
-}
+
+/* .RectangleMelodica {
+  width: 50%;
+  height: 100px; 
+  background-color: #f0f0f0; 
+} */
+
 .Logo {
-  width: 384px;
-  height: 108.09px;
-  left: 18px;
-  top: 63px;
-  position: absolute;
+  text-align: center;
 }
-.MelodicaV {
-  width: 384px;
-  height: 93.88px;
-  left: 0px;
-  top: 0.97px;
+
+.RectangleMelodica {
+  position: relative;
+  width: 50%;
+  height: 100px;
+  background-color: #f0f0f0;
+}
+
+.MelodicaViolet {
   position: absolute;
+  left: 29px;
+  top: 50%;
+  transform: translateY(-100%);
   text-align: center;
   color: #560bad;
-  font-size: 105.88px;
-  font-family: Black Heat Free Demo;
+  font-size: 2.5rem;
+  margin: 5px 0;
+  font-family: "Black Heat Free Demo", sans-serif;
   font-weight: 400;
+  z-index: 1;
   word-wrap: break-word;
 }
-.MelodicaR {
-  left: 12.29px;
-  top: 0px;
+
+.MelodicaRose {
   position: absolute;
+  left: 30.05px;
+  top: 50%;
+  transform: translateY(-100%);
   text-align: center;
   color: #f72585;
-  font-size: 105.88px;
-  font-family: Black Heat Free Demo;
+  font-size: 2.5rem;
+  margin: 5px 0;
+  font-family: "Black Heat Free Demo", sans-serif;
   font-weight: 400;
+  z-index: 2;
   word-wrap: break-word;
 }
+
 .Festival {
-  left: 298.82px;
-  top: 87.09px;
-  position: absolute;
+  position: relative;
+  top: 50%;
   text-align: center;
   color: #121212;
-  font-size: 23.53px;
-  font-family: Black Heat Free Demo;
+  font-size: 1rem;
+  font-family: "Black Heat Free Demo", sans-serif;
   font-weight: 400;
   word-wrap: break-word;
 }
 .Footer {
-  width: 1280px;
-  height: 400px;
-  left: 0px;
-  top: 2876px;
+  width: 100%;
   position: absolute;
+  padding: 20px;
+  background-color: #4bb19d;
+  text-align: center;
+  margin: 0 auto;
 }
-.Rectangle_footer {
-  width: 1280px;
-  height: 400px;
-  left: 0px;
-  top: 0px;
-  position: absolute;
-  background: #52b69a;
+
+.Footer .NousContacter,
+.Footer .Politiques,
+.Footer .Réseaux {
+  font-size: 1.2rem;
+  color: #000;
+  margin-bottom: 15px;
+  font-weight: 700;
 }
-.Contact {
-  left: 103px;
-  top: 43px;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 26px;
-  display: inline-flex;
+
+.Footer .Frame78,
+.Footer .Frame79,
+.Footer .Contact {
+  font-size: 1rem;
+  color: #000;
+  margin: 10px 0;
+  cursor: pointer;
 }
-.NousContacter {
-  color: black;
-  font-size: 36px;
-  font-family: Rubik;
-  font-weight: 600;
-  word-wrap: break-word;
+
+@media (max-width: 768px) {
+  .Footer {
+    padding: 10px;
+  }
+
+  .Footer .Contact {
+    font-size: 1rem;
+  }
+
+  .Footer .Frame78,
+  .Footer .Frame79 {
+    font-size: 0.9rem;
+  }
 }
-.nous_contacter {
-  width: 190px;
-  height: 226px;
-  color: black;
-  font-size: 16px;
-  font-family: Rubik;
-  font-weight: 400;
-  word-wrap: break-word;
+
+/* .Footer {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #f8f8f8;
 }
-.Frame78 {
-  left: 551px;
-  top: 43px;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 41px;
-  display: inline-flex;
+.Footer .Contact,
+.Footer .Frame78,
+.Footer .Frame79 {
+  margin: 10px 0;
+} */
+
+/* Media Queries pour différentes tailles d'écran */
+@media (min-width: 768px) {
+  .Menu {
+    justify-content: space-between;
+  }
+
+  .Histoire_title,
+  .Partenariats_title,
+  .LeProduit_title {
+    font-size: 2.5rem;
+  }
+
+  .histoire,
+  .partenariats,
+  .produit {
+    font-size: 1.2rem;
+  }
 }
-.Politiques {
-  color: black;
-  font-size: 36px;
-  font-family: Rubik;
-  font-weight: 600;
-  word-wrap: break-word;
-}
-.politiques {
-  width: 190px;
-  height: 226px;
-  color: black;
-  font-size: 16px;
-  font-family: Rubik;
-  font-weight: 400;
-  word-wrap: break-word;
-}
-.Frame79 {
-  left: 903px;
-  top: 43px;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 41px;
-  display: inline-flex;
-}
-.Réseaux {
-  color: black;
-  font-size: 36px;
-  font-family: Rubik;
-  font-weight: 600;
-  word-wrap: break-word;
-}
-.réseaux {
-  width: 190px;
-  height: 226px;
-  color: black;
-  font-size: 16px;
-  font-family: Rubik;
-  font-weight: 400;
-  word-wrap: break-word;
+
+@media (min-width: 1024px) {
+  .SiteEcho {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .Histoire_produit,
+  .Partenariats_Echo,
+  .Le_Produit {
+    flex: 1 1 30%;
+    margin: 20px;
+  }
+
+  .Frame88 {
+    flex: 1 1 100%;
+  }
 }
