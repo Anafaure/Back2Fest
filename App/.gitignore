@@ -2,7 +2,7 @@
 
 # dependencies
 node_modules/
-
+.DS_Store
 # Expo
 .expo/
 dist/

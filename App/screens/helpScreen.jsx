@@ -7,7 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 const HelpScreen = () => {
     const navigation = useNavigation();
     return (
-        <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
             <View style={styles.mainContainer}>
                 <View style={styles.circleContainer}>
             <TouchableOpacity
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        gap: 50,
+        // gap: 50,
     },
     circleContainer: {
         width:'100%',
@@ -124,6 +125,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 12,
         fontWeight: '600',
+        height: 20,
     },
     infoText: {
         alignSelf: 'stretch',

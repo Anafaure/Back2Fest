@@ -48,8 +48,7 @@ const SettingsScreen = () => {
 
     return (
         <View style={styles.container}>
-            {!loading && (
-                <ScrollView style={styles.contentContainer}>
+    
                     <View style={styles.headerContainer}>
                         <TouchableOpacity
                             style={styles.backButton}
@@ -59,6 +58,8 @@ const SettingsScreen = () => {
                         </TouchableOpacity>
                         <Text style={styles.headerTitle}>Paramètres</Text>
                     </View>
+                <ScrollView style={styles.contentContainer} showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
                     <Text style={styles.userName}>{userInfo.prenom || 'Prénom'} {userInfo.nom || 'Nom'}</Text>
 
                     <View style={styles.sectionContainer}>
@@ -76,6 +77,11 @@ const SettingsScreen = () => {
                             iconName="shield-checkmark"
                             label="Politique de confidentialité"
                             onPress={() => navigateToScreen('Privacy Policy')}
+                        />
+                        <MenuOption
+                            iconName="reader"
+                            label="CGU"
+                            onPress={() => navigateToScreen('CGU')}
                         />
                         <MenuOption
                             iconName="notifications"
@@ -101,7 +107,6 @@ const SettingsScreen = () => {
                         <Text style={styles.logoutText}>Déconnexion</Text>
                     </TouchableOpacity>
                 </ScrollView>
-            )}
         </View>
     );
 };
@@ -124,12 +129,15 @@ const styles = StyleSheet.create({
     headerContainer: {
         marginTop: '10%',
         marginBottom: 16,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     headerTitle: {
         fontSize: 32,
         fontWeight: '600',
         textTransform: 'uppercase',
         color: '#FDFDFD',
+   
     },
     userName: {
         fontSize: 32,
@@ -169,6 +177,10 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: '500',
         color: 'white',
+    },
+    backButton: {
+        marginRight: 10,
+        padding: 8,
     },
 });
 

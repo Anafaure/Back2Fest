@@ -20,6 +20,9 @@ import ShopScreen from '../screens/shopScreen.jsx';
 import BasketScreen from '../screens/basketScreen.jsx';
 import ProductScreen from '../screens/productScreen.jsx';
 import HelpScreen from '../screens/helpScreen.jsx';
+import TermsOfServiceScreen from '../screens/cguScreen.jsx'
+import AddLostItemScreen from '../screens/AddLostItemScreen.jsx';
+import LostItemDetailScreen from '../screens/LostItemDetailScreen.jsx';
 
 const homeName = 'Home';
 const calendarName = 'Calendar';
@@ -38,6 +41,10 @@ const shopName = 'Shop';
 const basketName = 'Basket';
 const productName = 'Product';
 const helpName = 'Help';
+const termsOfServiceName = 'CGU';
+const addLostItemName = 'AddLostItem';
+const lostItemDetailName = 'LostItemDetail';
+
 
 
  // Define a name for the artist screen
@@ -82,6 +89,9 @@ function TicketStackScreen() {
       <TicketStack.Screen name={notificationName} component={NotificationScreen} options={{ headerShown: false }}/>
       <TicketStack.Screen name={favouriteArtistName} component={FavouriteArtistScreen} options={{ headerShown: false }}/>
       <TicketStack.Screen name={lostPropertyName} component={LostPropertyScreen} options={{ headerShown: false }}/>
+      <TicketStack.Screen name={termsOfServiceName} component={TermsOfServiceScreen} options={{ headerShown: false }}/>
+      <TicketStack.Screen name={addLostItemName} component={AddLostItemScreen} options={{ headerShown: false }}/>
+      <TicketStack.Screen name={lostItemDetailName} component={LostItemDetailScreen} options={{ headerShown: false }}/>
     </TicketStack.Navigator>
   );
 }

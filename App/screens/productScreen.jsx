@@ -1,7 +1,21 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { ref, push } from "firebase/database";
+import { useAuth } from "../hooks/useAuth";
+import { database } from "../config/firebase";
 
-const ProductScreen = () => {
+
+function add_basket(item) {
+  const { user } = useAuth();
+  if (user) {
+    const add_basket = ref(database, `user/${user.uid}/basket`);
+    push(add_basket, item);
+    console.log(item);
+  }
+};
+
+function ProductScreen({ route, navigation }) {
+  const { item } = route.params;
   const [selectedDot, setSelectedDot] = useState(null);
   const [prices] = useState({
     "33cl": "1,50€",
@@ -9,13 +23,6 @@ const ProductScreen = () => {
     "75cl": "4,50€",
   });
 
-  const item = 1;
-  const add_basket = () => {
-    if (user) {
-      const add_basket = ref(database, `user/${user.uid}/basket`);
-      push(add_basket, item);
-    }
-  }
 
   const handleDotPress = (dotIndex) => {
     setSelectedDot(dotIndex);
@@ -25,35 +32,36 @@ const ProductScreen = () => {
     <View style={styles.container}>
       <View style={styles.card}>
         <View style={styles.imageContainer}>
-          <Image
-            source={require("../assets/Coca-Cola.png")}
-            style={styles.image}
-          />
+          <Image source={item.image} style={styles.image} />
         </View>
         <Text style={styles.format}>Format</Text>
         <View style={styles.dotsContainer}>
-          <Dot
-            onPress={() => handleDotPress(0)}
-            selected={selectedDot === 0}
-            text="33cl"
-            price={prices["33cl"]}
-          />
-          <Dot
-            onPress={() => handleDotPress(1)}
-            selected={selectedDot === 1}
-            text="50cl"
-            price={prices["50cl"]}
-          />
-          <Dot
-            onPress={() => handleDotPress(2)}
-            selected={selectedDot === 2}
-            text="75cl"
-            price={prices["75cl"]}
-          />
+          {(item.category === "Boissons" || item.category === "Alcools") && (
+            <>
+              <Dot
+                onPress={() => handleDotPress(0)}
+                selected={selectedDot === 0}
+                text="33cl"
+                price={prices["33cl"]}
+              />
+              <Dot
+                onPress={() => handleDotPress(1)}
+                selected={selectedDot === 1}
+                text="50cl"
+                price={prices["50cl"]}
+              />
+              <Dot
+                onPress={() => handleDotPress(2)}
+                selected={selectedDot === 2}
+                text="75cl"
+                price={prices["75cl"]}
+              />
+            </>
+          )}
         </View>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Ajouter</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={add_basket(item)}>
+          <Text style={styles.buttonText}>Ajouter</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

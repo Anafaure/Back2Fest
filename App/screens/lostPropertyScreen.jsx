@@ -1,29 +1,55 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { database, ref, onValue } from '../config/firebase';
+import { useAuth } from '../hooks/useAuth';
 
 const LostPropertyScreen = () => {
-    const [loading, setLoading] = useState(false);
+    const [lostItems, setLostItems] = useState([]);
     const navigation = useNavigation();
+    const { user } = useAuth();
+
+    useEffect(() => {
+        const itemsRef = ref(database, 'perdu');
+        onValue(itemsRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                const items = Object.keys(data).map((key) => ({ id: key, ...data[key] }));
+                setLostItems(items);
+            } else {
+                setLostItems([]);
+            }
+        });
+    }, []);
+
     return (
         <View style={styles.container}>
-            {loading ? (
-                <ActivityIndicator size="large" color="#0000ff" />
-            ) : (
-                <ScrollView style={styles.contentContainer}>
-                    <View style={styles.headerContainer}>
+            <View style={styles.headerContainer}>
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                    <Ionicons name="arrow-back" size={30} color="white" />
+                </TouchableOpacity>
+                <Text style={styles.headerTitle}>Objets trouvés</Text>
+            </View>
+            <ScrollView style={styles.contentContainer}>
+                <TouchableOpacity
+                    style={styles.addButton}
+                    onPress={() => navigation.navigate('AddLostItem')}
+                >
+                    <Text style={styles.addButtonText}>Ajouter un objet</Text>
+                </TouchableOpacity>
+                <View style={styles.grid}>
+                    {lostItems.map((item) => (
                         <TouchableOpacity
-                            style={styles.backButton}
-                            onPress={() => navigation.goBack()}
+                            key={item.id}
+                            style={styles.card}
+                            onPress={() => navigation.navigate('LostItemDetail', { itemId: item.id })}
                         >
-                            <Ionicons name="arrow-back" size={30} color="white" />
+                            <Image source={{ uri: item.image }} style={styles.cardImage} />
                         </TouchableOpacity>
-                        <Text style={styles.headerTitle}>Objets trouvés</Text>
-                    </View>
-                    {/* You can place additional sections or options here */}
-                </ScrollView>
-            )}
+                    ))}
+                </View>
+            </ScrollView>
         </View>
     );
 };
@@ -52,6 +78,35 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
+    },
+    addButton: {
+        backgroundColor: '#F72585',
+        borderRadius: 10,
+        padding: 16,
+        alignItems: 'center',
+        marginBottom: 16,
+    },
+    addButtonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: '600',
+    },
+    grid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+    },
+    card: {
+        backgroundColor: '#2A2A2A',
+        borderRadius: 10,
+        padding: 16,
+        marginBottom: 16,
+        width: '48%',
+    },
+    cardImage: {
+        width: '100%',
+        height: 100,
+        borderRadius: 10,
     },
 });
 

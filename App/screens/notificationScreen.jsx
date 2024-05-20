@@ -22,13 +22,14 @@ const NotificationScreen = () => {
 
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.contentContainer}>
                 <View style={styles.headerContainer}>
                     <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                         <Ionicons name="arrow-back" size={30} color="white" />
                     </TouchableOpacity>
                     <Text style={styles.headerTitle}>Notifications</Text>
                 </View>
+            <ScrollView style={styles.contentContainer} showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
 
                 <View style={styles.sectionContainer}>
                     <Text style={styles.sectionTitle}>Mode pause</Text>
