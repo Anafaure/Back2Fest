@@ -79,6 +79,11 @@ const SettingsScreen = () => {
                             onPress={() => navigateToScreen('Privacy Policy')}
                         />
                         <MenuOption
+                            iconName="reader"
+                            label="CGU"
+                            onPress={() => navigateToScreen('CGU')}
+                        />
+                        <MenuOption
                             iconName="notifications"
                             label="Gérer mes notifications"
                             onPress={() => navigateToScreen('Notifications')}
@@ -132,6 +137,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         textTransform: 'uppercase',
         color: '#FDFDFD',
+   
     },
     userName: {
         fontSize: 32,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, useWindowDimensions, Alert } from 'react-native';
 import { ref, onValue, off, database } from '../config/firebase';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
@@ -40,14 +40,41 @@ export default function HomeScreen() {
 
   const responsiveStyles = createResponsiveStyles(width, height);
 
+  const handleSOSPress = () => {
+    Alert.alert(
+      "Êtes-vous sûr de vouloir contacter les secours ?",
+      "",
+      [
+        {
+          text: "Non",
+          style: "cancel",
+        },
+        {
+          text: "Oui",
+          onPress: () => {
+            Alert.alert(
+              "Les secours sont en chemin",
+              "Veuillez rester là où vous êtes. Arrivée dans 5 minutes.",
+              [
+                { text: "Fermer" }
+              ]
+            );
+          },
+        },
+      ]
+    );
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={responsiveStyles.scrollContainer} showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}>
+                  showsHorizontalScrollIndicator={false}>
         <Text style={responsiveStyles.title}>Raccourcis</Text>
         <View style={responsiveStyles.sosmap}>
           <View style={responsiveStyles.sosContainer}>
-            <Text style={responsiveStyles.sos}>S.O.S</Text>
+            <TouchableOpacity onPress={handleSOSPress}>
+              <Text style={responsiveStyles.sos}>S.O.S</Text>
+            </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate('Map')}>
             <Image
@@ -59,7 +86,7 @@ export default function HomeScreen() {
         <Text style={responsiveStyles.title}>Aujourd'hui</Text>
         <Text style={responsiveStyles.subtitle}>Artistes</Text>
         <ScrollView horizontal showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}>
+                    showsHorizontalScrollIndicator={false}>
           {artists.map((artist, index) => (
             <TouchableOpacity key={index} onPress={() => navigation.navigate('Artist', { artistName: artist.artistName })}>
               <View style={responsiveStyles.card}>
@@ -75,9 +102,9 @@ export default function HomeScreen() {
 
         <Text style={responsiveStyles.subtitle}>Activités</Text>
         <ScrollView horizontal showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}>
+                    showsHorizontalScrollIndicator={false}>
           {artists.map((artist, index) => (
-            <TouchableOpacity key={index} >
+            <TouchableOpacity key={index}>
               <View style={responsiveStyles.card}>
                 <Image
                   style={responsiveStyles.cardImage}
@@ -102,14 +129,14 @@ const createResponsiveStyles = (width, height) => StyleSheet.create({
   },
   title: {
     color: '#FDFDFD',
-    fontSize: width * 0.09, // Ajusté pour la largeur de l'écran
+    fontSize: width * 0.09,
     fontWeight: '600',
     marginBottom: height * 0.01,
     marginTop: height * 0.05,
   },
   subtitle: {
     color: '#FDFDFD',
-    fontSize: width * 0.06, // Ajusté pour la largeur de l'écran
+    fontSize: width * 0.06,
     fontWeight: '600',
     marginBottom: height * 0.01,
   },
@@ -118,22 +145,22 @@ const createResponsiveStyles = (width, height) => StyleSheet.create({
     borderRadius: 10,
     padding: width * 0.025,
     alignItems: 'center',
-    width: width * 0.4, // Ajusté pour la largeur de l'écran
+    width: width * 0.4,
     justifyContent: 'center',
     marginHorizontal: width * 0.01,
     marginBottom: height * 0.02,
-    height: height * 0.20, // Fixe la hauteur des cartes
+    height: height * 0.20,
   },
   cardText: {
     color: 'black',
-    fontSize: width * 0.04, // Ajusté pour la largeur de l'écran
+    fontSize: width * 0.04,
     fontWeight: '600',
     textTransform: 'uppercase',
     textAlign: 'center',
   },
   cardImage: {
-    width: width * 0.25, // Ajusté pour la largeur de l'écran
-    height: width * 0.25, // Ajusté pour la largeur de l'écran
+    width: width * 0.25,
+    height: width * 0.25,
     marginBottom: height * 0.01,
   },
   sosContainer: {
@@ -141,24 +168,24 @@ const createResponsiveStyles = (width, height) => StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#E12020',
-    padding: width * 0.06, // Réduit la taille du padding
+    padding: width * 0.06,
     borderRadius: 10,
-    marginRight: width * 0.08, // Ajouter plus d'espace entre SOS et la carte
+    marginRight: width * 0.08,
   },
   sos: {
     color: '#FDFDFD',
-    fontSize: width * 0.1, // Réduit la taille de la police
+    fontSize: width * 0.1,
     fontWeight: '700',
     textAlign: 'center',
   },
   sosmap: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: height * 0.03, // Ajouter plus d'espace en dessous
+    marginBottom: height * 0.03,
   },
   map: {
-    width: width * 0.40, // Réduit la largeur de la carte
-    height: height * 0.18, // Réduit la hauteur de la carte
+    width: width * 0.40,
+    height: height * 0.18,
     borderRadius: 10,
   },
 });
