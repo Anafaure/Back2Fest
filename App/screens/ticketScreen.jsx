@@ -59,6 +59,9 @@ function TicketScreen() {
         </View>
         <Text style={styles.passType}>Pass 2 jours</Text>
       </View>
+      <TouchableOpacity onPress={() => navigation.navigate('NFC')}>
+  <Ionicons name="settings-outline" size={24} color="white" />
+</TouchableOpacity>
     </SafeAreaView>
   );
 }
