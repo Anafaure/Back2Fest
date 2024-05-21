@@ -150,6 +150,9 @@ function EchoScreen() {
         }
     };
 
+    const sendAlert = () => {
+        Alert.alert('Transfert effectué', 'Vos gains/achats ont été transférés à votre gourde')
+    };
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}
@@ -198,6 +201,12 @@ function EchoScreen() {
 
                     {renderContent()}
                 </View>
+                <TouchableOpacity
+                        style={styles.logoutButton}
+                        onPress={() => {sendAlert()}}
+                    >
+                        <Text style={styles.logoutText}>Transférer mes gains/achats à ma gourde</Text>
+                    </TouchableOpacity>
 
                 <Text style={styles.mainTitle}>Vos achats</Text>
                 <View style={styles.shopContainer}>
@@ -391,6 +400,22 @@ const styles = StyleSheet.create({
     },
     shopContainer: {
         alignSelf: 'center',
+    },
+    logoutButton: {
+        backgroundColor: '#F72585',
+        borderRadius: 5,
+        paddingVertical: 6,
+        paddingHorizontal: 20,
+        alignItems: 'center',
+        maxWidth: '90%', 
+        alignSelf: 'center',
+        marginBottom: 20,
+    },
+    logoutText: {
+        fontSize: 24,
+        fontWeight: '500',
+        color: 'white',
+        textAlign: 'center',
     },
 });
 

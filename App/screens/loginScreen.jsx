@@ -10,6 +10,7 @@ import {
   Text,
   View,
   ImageBackground,
+  useWindowDimensions,
 } from "react-native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -23,6 +24,9 @@ function SignInScreen({ navigation }) {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const { width, height } = useWindowDimensions();
+  const responsiveStyles = createResponsiveStyles(width, height);
 
   async function signIn() {
     if (value.email === "" || value.password === "") {
@@ -46,31 +50,31 @@ function SignInScreen({ navigation }) {
   }
 
   return (
-    <ImageBackground source={background} style={styles.background} blurRadius={2}> 
-      <View style={styles.container}>
+    <ImageBackground source={background} style={responsiveStyles.background} resizeMode="cover" blurRadius={2}>
+      <View style={responsiveStyles.container}>
         <Image
           source={logo}
-          style={{ width: 400, alignSelf: "center" }}
+          style={responsiveStyles.logo}
         />
-        <Text style={styles.title}>Connecte-toi à ton compte !</Text>
+        <Text style={responsiveStyles.title}>Connecte-toi à ton compte !</Text>
 
-        <View style={{ marginVertical: 24 }}>
-          <View style={{ marginTop: 8, marginBottom: 16 }}>
-            <View style={styles.inputContainer}>
-              <Icon style={styles.icon} name="email" size={18} color="gray" />
+        <View style={responsiveStyles.form}>
+          <View style={responsiveStyles.inputWrapper}>
+            <View style={responsiveStyles.inputContainer}>
+              <Icon style={responsiveStyles.icon} name="email" size={18} color="gray" />
               <TextInput
                 placeholder="Email"
                 value={value.email}
-                style={styles.input}
+                style={responsiveStyles.input}
                 onChangeText={(text) => setValue({ ...value, email: text })}
               />
             </View>
 
-            <View style={styles.inputContainer}>
-              <Icon style={styles.icon} name="lock" size={18} color="gray" />
+            <View style={responsiveStyles.inputContainer}>
+              <Icon style={responsiveStyles.icon} name="lock" size={18} color="gray" />
               <TextInput
                 placeholder="Mot de passe"
-                style={styles.input}
+                style={responsiveStyles.input}
                 onChangeText={(text) => setValue({ ...value, password: text })}
                 secureTextEntry={!showPassword}
               />
@@ -79,18 +83,18 @@ function SignInScreen({ navigation }) {
                   name={showPassword ? "eye-off" : "eye"}
                   size={18}
                   color="gray"
-                  style={styles.icon}
+                  style={responsiveStyles.icon}
                 />
               </Pressable>
             </View>
           </View>
-          <Pressable style={styles.button} onPress={signIn}>
-            <Text style={styles.buttonText}>Connexion</Text>
+          <Pressable style={responsiveStyles.button} onPress={signIn}>
+            <Text style={responsiveStyles.buttonText}>Connexion</Text>
           </Pressable>
         </View>
-        <Text style={styles.bottomText}>
-          Pas de compte ? {" "}
-          <Text style={styles.linkText} onPress={() => navigation.navigate("Sign Up")}>
+        <Text style={responsiveStyles.bottomText}>
+          Pas de compte ?{" "}
+          <Text style={responsiveStyles.linkText} onPress={() => navigation.navigate("Sign Up")}>
             Inscris toi ici
           </Text>
         </Text>
@@ -101,45 +105,57 @@ function SignInScreen({ navigation }) {
 
 export default SignInScreen;
 
-const styles = StyleSheet.create({
+const createResponsiveStyles = (width, height) => StyleSheet.create({
   background: {
     width: "100%",
     height: "100%",
   },
   container: {
-    marginHorizontal: 16,
-    height: "83%",
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    gap: 24,
-    flex: 1,
+    marginHorizontal: width * 0.04,
   },
+  // logo: {
+  //   width: width * 0.6,
+  //   height: undefined,
+  //   aspectRatio: 1,
+  //   alignSelf: "center",
+  // },
   title: {
-    fontSize: 24,
+    fontSize: width * 0.06,
     fontWeight: "bold",
     textAlign: "center",
     color: "white",
+    marginBottom: height * 0.02,
+  },
+  form: {
+    width: width * 0.8,
+    marginVertical: height * 0.03,
+  },
+  inputWrapper: {
+    marginTop: height * 0.01,
+    marginBottom: height * 0.02,
   },
   inputContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,
-    paddingHorizontal: 8,
-    paddingVertical: 8,
+    paddingHorizontal: width * 0.02,
+    paddingVertical: height * 0.01,
     backgroundColor: "#f3f3f3",
-    marginBottom: 16,
-    width: "120%",
-    alignSelf: "center",
+    marginBottom: height * 0.02,
+    width: "100%",
   },
   icon: {
-    padding: 10,
+    padding: width * 0.02,
   },
   input: {
     flex: 1,
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
+    paddingTop: height * 0.01,
+    paddingRight: width * 0.02,
+    paddingBottom: height * 0.01,
     paddingLeft: 0,
     backgroundColor: "#f3f3f3",
     color: "#424242",
@@ -147,15 +163,15 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#F72585",
     borderRadius: 25,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    margin: 16,
+    paddingVertical: height * 0.015,
+    paddingHorizontal: width * 0.1,
+    margin: height * 0.02,
   },
   buttonText: {
     textAlign: "center",
     color: "white",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: width * 0.045,
   },
   bottomText: {
     textAlign: "center",
