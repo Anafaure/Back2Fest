@@ -140,6 +140,18 @@ const EventApp = () => {
     }
   };
 
+  // Function to determine the scene text color
+  const getSceneTextColor = (scene) => {
+    switch (scene) {
+      case "1":
+        return { color: "#560BAD" };
+        case "2":
+          return { color: "#F72585" };
+      default:
+        return { color: "grey" };
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -194,7 +206,9 @@ const EventApp = () => {
                 <Text
                   style={styles.duration}
                 >{`${event.heure_debut} - ${event.heure_fin}`}</Text>
-                <Text style={styles.scene}>{`Scene ${event.scene}`}</Text>
+                <Text style={[styles.scene, getSceneTextColor(event.scene)]}>
+                  {`Scene ${event.scene}`}
+                </Text>
               </View>
               <TouchableOpacity
                 onPress={() => {
@@ -296,7 +310,7 @@ const styles = StyleSheet.create({
   },
   scene: {
     fontSize: 12,
-    color: "grey",
+    // Default color, will be overridden by getSceneTextColor
   },
 });
 

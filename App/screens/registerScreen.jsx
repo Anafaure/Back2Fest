@@ -152,98 +152,108 @@ function SignUpScreen({ navigation }) {
   return (
     <ImageBackground source={background} style={responsiveStyles.background} resizeMode="cover" blurRadius={2}>
       <ScrollView>
-      <View style={responsiveStyles.container}>
-        <Image
-          source={logo}
-          style={responsiveStyles.logo}
-        />
-        <Text style={responsiveStyles.title}>Crée un nouveau compte !</Text>
+        <View style={responsiveStyles.container}>
+          <Image
+            source={logo}
+            style={responsiveStyles.logo}
+          />
+          <Text style={responsiveStyles.title}>Crée un nouveau compte !</Text>
 
-        <View style={responsiveStyles.form}>
-          <View style={responsiveStyles.inputWrapper}>
-            <View style={responsiveStyles.inputContainer}>
-              <Icon style={responsiveStyles.icon} name="email" size={18} color="gray" />
-              <TextInput
-                placeholder="Email"
-                value={value.email}
-                style={responsiveStyles.input}
-                onChangeText={(text) => setValue({ ...value, email: text })}
-              />
-            </View>
+          <View style={responsiveStyles.form}>
+            <View style={responsiveStyles.inputWrapper}>
+              <View style={responsiveStyles.inputContainer}>
+                <Icon style={responsiveStyles.icon} name="email" size={18} color="gray" />
+                <TextInput
+                  placeholder="Email"
+                  value={value.email}
+                  style={responsiveStyles.input}
+                  onChangeText={(text) => setValue({ ...value, email: text })}
+                />
+              </View>
 
-            <View style={responsiveStyles.inputContainer}>
-              <Icon style={responsiveStyles.icon} name="lock" size={18} color="gray" />
-              <TextInput
-                placeholder="Mot de passe"
-                style={responsiveStyles.input}
-                onChangeText={(text) => setValue({ ...value, password: text })}
-                secureTextEntry={!showPassword}
-              />
-              <Pressable onPress={() => setShowPassword(!showPassword)}>
-                <Icon
-                  name={showPassword ? "eye-off" : "eye"}
-                  size={18}
-                  color="gray"
-                  style={responsiveStyles.icon}
+              <View style={responsiveStyles.inputContainer}>
+                <Icon style={responsiveStyles.icon} name="lock" size={18} color="gray" />
+                <TextInput
+                  placeholder="Mot de passe"
+                  style={responsiveStyles.input}
+                  onChangeText={(text) => setValue({ ...value, password: text })}
+                  secureTextEntry={!showPassword}
                 />
-              </Pressable>
-            </View>
-            <Text style={responsiveStyles.passwordPolicy}>
-              Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.
-            </Text>
-            <View style={responsiveStyles.inputContainer}>
-              <Icon style={responsiveStyles.icon} name="lock" size={18} color="gray" />
-              <TextInput
-                placeholder="Confirmer le mot de passe"
-                style={responsiveStyles.input}
-                onChangeText={(text) => setValue({ ...value, passwordCheck: text })}
-                secureTextEntry={!showPasswordCheck}
-              />
-              <Pressable onPress={() => setShowPasswordCheck(!showPasswordCheck)}>
-                <Icon
-                  name={showPasswordCheck ? "eye-off" : "eye"}
-                  size={18}
-                  color="gray"
-                  style={responsiveStyles.icon}
+                <Pressable onPress={() => setShowPassword(!showPassword)}>
+                  <Icon
+                    name={showPassword ? "eye-off" : "eye"}
+                    size={18}
+                    color="gray"
+                    style={responsiveStyles.icon}
+                  />
+                </Pressable>
+              </View>
+              <Text style={responsiveStyles.passwordPolicy}>
+                Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.
+              </Text>
+              <View style={responsiveStyles.inputContainer}>
+                <Icon style={responsiveStyles.icon} name="lock" size={18} color="gray" />
+                <TextInput
+                  placeholder="Confirmer le mot de passe"
+                  style={responsiveStyles.input}
+                  onChangeText={(text) => setValue({ ...value, passwordCheck: text })}
+                  secureTextEntry={!showPasswordCheck}
                 />
-              </Pressable>
+                <Pressable onPress={() => setShowPasswordCheck(!showPasswordCheck)}>
+                  <Icon
+                    name={showPasswordCheck ? "eye-off" : "eye"}
+                    size={18}
+                    color="gray"
+                    style={responsiveStyles.icon}
+                  />
+                </Pressable>
+              </View>
+              <View style={responsiveStyles.inputContainer}>
+                <Icon style={responsiveStyles.icon} name="calendar" size={18} color="gray" />
+                <TextInput
+                  placeholder="Date de naissance (JJ/MM/AAAA)"
+                  style={responsiveStyles.input}
+                  onChangeText={(text) => setValue({ ...value, birthdate: text })}
+                />
+              </View>
+              <View style={responsiveStyles.inputContainer}>
+                <Icon style={responsiveStyles.icon} name="account" size={18} color="gray" />
+                <TextInput
+                  placeholder="Prénom"
+                  style={responsiveStyles.input}
+                  onChangeText={(text) => setValue({ ...value, firstname: text })}
+                />
+              </View>
+              <View style={responsiveStyles.inputContainer}>
+                <Icon style={responsiveStyles.icon} name="account" size={18} color="gray" />
+                <TextInput
+                  placeholder="Nom"
+                  style={responsiveStyles.input}
+                  onChangeText={(text) => setValue({ ...value, lastname: text })}
+                />
+              </View>
             </View>
-            <View style={responsiveStyles.inputContainer}>
-              <Icon style={responsiveStyles.icon} name="calendar" size={18} color="gray" />
-              <TextInput
-                placeholder="Date de naissance (JJ/MM/AAAA)"
-                style={responsiveStyles.input}
-                onChangeText={(text) => setValue({ ...value, birthdate: text })}
-              />
-            </View>
-            <View style={responsiveStyles.inputContainer}>
-              <Icon style={responsiveStyles.icon} name="account" size={18} color="gray" />
-              <TextInput
-                placeholder="Prénom"
-                style={responsiveStyles.input}
-                onChangeText={(text) => setValue({ ...value, firstname: text })}
-              />
-            </View>
-            <View style={responsiveStyles.inputContainer}>
-              <Icon style={responsiveStyles.icon} name="account" size={18} color="gray" />
-              <TextInput
-                placeholder="Nom"
-                style={responsiveStyles.input}
-                onChangeText={(text) => setValue({ ...value, lastname: text })}
-              />
-            </View>
+            <Pressable style={responsiveStyles.button} onPress={signUp}>
+              <Text style={responsiveStyles.buttonText}>Créer un compte</Text>
+            </Pressable>
           </View>
-          <Pressable style={responsiveStyles.button} onPress={signUp}>
-            <Text style={responsiveStyles.buttonText}>Créer un compte</Text>
-          </Pressable>
-        </View>
-        <Text style={responsiveStyles.bottomText}>
-          Déjà un compte ?{" "}
-          <Text style={responsiveStyles.linkText} onPress={() => navigation.navigate("Sign In")}>
-            Connecte-toi ici
+          <Text style={responsiveStyles.termsText}>
+            En vous inscrivant, vous acceptez les{" "}
+            <Text style={responsiveStyles.linkText} onPress={() => navigation.navigate("Terms of Service")}>
+              conditions générales d'utilisation
+            </Text>{" "}
+            et la{" "}
+            <Text style={responsiveStyles.linkText} onPress={() => navigation.navigate("Privacy Policy")}>
+              politique de confidentialité
+            </Text>.
           </Text>
-        </Text>
-      </View>
+          <Text style={responsiveStyles.bottomText}>
+            Déjà un compte ?{" "}
+            <Text style={responsiveStyles.linkText} onPress={() => navigation.navigate("Sign In")}>
+              Connecte-toi ici
+            </Text>
+          </Text>
+        </View>
       </ScrollView>
     </ImageBackground>
   );
@@ -264,12 +274,12 @@ const createResponsiveStyles = (width, height) => StyleSheet.create({
     marginTop: height * 0.1,
     marginBottom: height * 0.1,
   },
-  // logo: {
-  //   width: width * 0.6,
-  //   height: undefined,
-  //   aspectRatio: 1,
-  //   alignSelf: "center",
-  // },
+  logo: {
+    width: width * 0.6,
+    height: undefined,
+    aspectRatio: 1,
+    alignSelf: "center",
+  },
   title: {
     fontSize: width * 0.06,
     fontWeight: "bold",
@@ -326,6 +336,12 @@ const createResponsiveStyles = (width, height) => StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontSize: width * 0.045,
+  },
+  termsText: {
+    textAlign: "center",
+    color: "white",
+    fontSize: width * 0.03,
+    marginBottom: height * 0.02,
   },
   bottomText: {
     textAlign: "center",

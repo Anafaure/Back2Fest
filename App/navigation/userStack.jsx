@@ -24,10 +24,10 @@ import TermsOfServiceScreen from '../screens/cguScreen.jsx'
 import AddLostItemScreen from '../screens/AddLostItemScreen.jsx';
 import LostItemDetailScreen from '../screens/LostItemDetailScreen.jsx';
 
-const homeName = 'Home';
-const calendarName = 'Calendar';
-const mapName = 'Map';
-const ticketName = 'Ticket';
+const homeName = 'Accueil';
+const calendarName = 'Programme';
+const mapName = 'Carte';
+const ticketName = 'Billet';
 const echoName = 'Echo';
 const artistName = 'Artist';
 const settingsName = 'Settings';
