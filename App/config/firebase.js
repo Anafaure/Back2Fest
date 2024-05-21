@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged, updateEmail, sendEmailVerification } from 'firebase/auth';
-import { getDatabase, ref, onValue, off, push } from 'firebase/database';
+import { getAuth, onAuthStateChanged, updateEmail, sendEmailVerification, sendPasswordResetEmail, verifyBeforeUpdateEmail } from 'firebase/auth';
+import { getDatabase, ref, onValue, off, push, update } from 'firebase/database';
 import { getStorage } from 'firebase/storage';
 
 // Add your Firebase project configuration here
@@ -24,4 +24,4 @@ export const FIREBASE_AUTH = auth;
 export const FIREBASE_STORAGE = storage;
 
 // Export just the necessary functions for use elsewhere
-export { auth, database, ref, onValue, off, onAuthStateChanged, push, updateEmail, sendEmailVerification };
+export { auth, database, ref, onValue, off, onAuthStateChanged, push, updateEmail, sendEmailVerification, sendPasswordResetEmail, update, verifyBeforeUpdateEmail };
