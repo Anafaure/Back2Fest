@@ -10,6 +10,8 @@ import {
   Text,
   View,
   ImageBackground,
+  useWindowDimensions,
+  ScrollView,
 } from "react-native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
@@ -78,6 +80,9 @@ function SignUpScreen({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordCheck, setShowPasswordCheck] = useState(false);
 
+  const { width, height } = useWindowDimensions();
+  const responsiveStyles = createResponsiveStyles(width, height);
+
   const regex_password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   async function signUp() {
@@ -145,31 +150,32 @@ function SignUpScreen({ navigation }) {
   }
 
   return (
-    <ImageBackground source={background} style={styles.background} blurRadius={2}>
-      <View style={styles.container}>
+    <ImageBackground source={background} style={responsiveStyles.background} resizeMode="cover" blurRadius={2}>
+      <ScrollView>
+      <View style={responsiveStyles.container}>
         <Image
           source={logo}
-          style={{ width: 400, alignSelf: "center" }}
+          style={responsiveStyles.logo}
         />
-        <Text style={styles.title}>Crée un nouveau compte !</Text>
+        <Text style={responsiveStyles.title}>Crée un nouveau compte !</Text>
 
-        <View style={{ marginVertical: 24 }}>
-          <View style={{ marginTop: 8, marginBottom: 16 }}>
-            <View style={styles.inputContainer}>
-              <Icon style={styles.icon} name="email" size={18} color="gray" />
+        <View style={responsiveStyles.form}>
+          <View style={responsiveStyles.inputWrapper}>
+            <View style={responsiveStyles.inputContainer}>
+              <Icon style={responsiveStyles.icon} name="email" size={18} color="gray" />
               <TextInput
                 placeholder="Email"
                 value={value.email}
-                style={styles.input}
+                style={responsiveStyles.input}
                 onChangeText={(text) => setValue({ ...value, email: text })}
               />
             </View>
 
-            <View style={styles.inputContainer}>
-              <Icon style={styles.icon} name="lock" size={18} color="gray" />
+            <View style={responsiveStyles.inputContainer}>
+              <Icon style={responsiveStyles.icon} name="lock" size={18} color="gray" />
               <TextInput
                 placeholder="Mot de passe"
-                style={styles.input}
+                style={responsiveStyles.input}
                 onChangeText={(text) => setValue({ ...value, password: text })}
                 secureTextEntry={!showPassword}
               />
@@ -178,18 +184,18 @@ function SignUpScreen({ navigation }) {
                   name={showPassword ? "eye-off" : "eye"}
                   size={18}
                   color="gray"
-                  style={styles.icon}
+                  style={responsiveStyles.icon}
                 />
               </Pressable>
             </View>
-            <Text style={styles.passwordPolicy}>
+            <Text style={responsiveStyles.passwordPolicy}>
               Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.
             </Text>
-            <View style={styles.inputContainer}>
-              <Icon style={styles.icon} name="lock" size={18} color="gray" />
+            <View style={responsiveStyles.inputContainer}>
+              <Icon style={responsiveStyles.icon} name="lock" size={18} color="gray" />
               <TextInput
                 placeholder="Confirmer le mot de passe"
-                style={styles.input}
+                style={responsiveStyles.input}
                 onChangeText={(text) => setValue({ ...value, passwordCheck: text })}
                 secureTextEntry={!showPasswordCheck}
               />
@@ -198,118 +204,132 @@ function SignUpScreen({ navigation }) {
                   name={showPasswordCheck ? "eye-off" : "eye"}
                   size={18}
                   color="gray"
-                  style={styles.icon}
+                  style={responsiveStyles.icon}
                 />
               </Pressable>
             </View>
-            <View style={styles.inputContainer}>
-              <Icon style={styles.icon} name="calendar" size={18} color="gray" />
+            <View style={responsiveStyles.inputContainer}>
+              <Icon style={responsiveStyles.icon} name="calendar" size={18} color="gray" />
               <TextInput
                 placeholder="Date de naissance (JJ/MM/AAAA)"
-                style={styles.input}
+                style={responsiveStyles.input}
                 onChangeText={(text) => setValue({ ...value, birthdate: text })}
               />
             </View>
-            <View style={styles.inputContainer}>
-              <Icon style={styles.icon} name="account" size={18} color="gray" />
+            <View style={responsiveStyles.inputContainer}>
+              <Icon style={responsiveStyles.icon} name="account" size={18} color="gray" />
               <TextInput
                 placeholder="Prénom"
-                style={styles.input}
+                style={responsiveStyles.input}
                 onChangeText={(text) => setValue({ ...value, firstname: text })}
               />
             </View>
-            <View style={styles.inputContainer}>
-              <Icon style={styles.icon} name="account" size={18} color="gray" />
+            <View style={responsiveStyles.inputContainer}>
+              <Icon style={responsiveStyles.icon} name="account" size={18} color="gray" />
               <TextInput
                 placeholder="Nom"
-                style={styles.input}
+                style={responsiveStyles.input}
                 onChangeText={(text) => setValue({ ...value, lastname: text })}
               />
             </View>
           </View>
-          <Pressable style={styles.button} onPress={signUp}>
-            <Text style={styles.buttonText}>Créer un compte</Text>
+          <Pressable style={responsiveStyles.button} onPress={signUp}>
+            <Text style={responsiveStyles.buttonText}>Créer un compte</Text>
           </Pressable>
         </View>
-        <Text style={styles.bottomText}>
-          Déjà un compte ? {" "}
-          <Text style={styles.linkText} onPress={() => navigation.navigate("Sign In")}>
+        <Text style={responsiveStyles.bottomText}>
+          Déjà un compte ?{" "}
+          <Text style={responsiveStyles.linkText} onPress={() => navigation.navigate("Sign In")}>
             Connecte-toi ici
           </Text>
         </Text>
       </View>
+      </ScrollView>
     </ImageBackground>
   );
 }
 
 export default SignUpScreen;
 
-const styles = StyleSheet.create({
+const createResponsiveStyles = (width, height) => StyleSheet.create({
   background: {
     width: "100%",
     height: "100%",
   },
   container: {
-    marginHorizontal: 16,
-    // height: "83%",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    // gap: 24,
+    marginHorizontal: width * 0.04,
+    marginTop: height * 0.1,
+    marginBottom: height * 0.1,
   },
+  // logo: {
+  //   width: width * 0.6,
+  //   height: undefined,
+  //   aspectRatio: 1,
+  //   alignSelf: "center",
+  // },
   title: {
-    fontSize: 24,
+    fontSize: width * 0.06,
     fontWeight: "bold",
     textAlign: "center",
     color: "white",
+    marginBottom: height * 0.02,
+  },
+  form: {
+    width: width * 0.8,
+    marginVertical: height * 0.03,
+  },
+  inputWrapper: {
+    marginTop: height * 0.01,
+    marginBottom: height * 0.02,
   },
   inputContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 15,
-    paddingHorizontal: 8,
-    paddingVertical: 8,
+    paddingHorizontal: width * 0.02,
+    paddingVertical: height * 0.01,
     backgroundColor: "#f3f3f3",
-    marginBottom: 16,
-    width: "80%",
-    alignSelf: "center",
+    marginBottom: height * 0.02,
+    width: "100%",
   },
   icon: {
-    padding: 10,
+    padding: width * 0.02,
   },
   input: {
     flex: 1,
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
+    paddingTop: height * 0.01,
+    paddingRight: width * 0.02,
+    paddingBottom: height * 0.01,
     paddingLeft: 0,
     backgroundColor: "#f3f3f3",
     color: "#424242",
   },
   passwordPolicy: {
     color: "white",
-    marginBottom: 16,
-    fontSize: 12,
+    marginBottom: height * 0.02,
+    fontSize: width * 0.03,
     textAlign: "center",
   },
   button: {
     backgroundColor: "#F72585",
     borderRadius: 25,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    margin: 16,
+    paddingVertical: height * 0.015,
+    paddingHorizontal: width * 0.1,
+    margin: height * 0.02,
   },
   buttonText: {
     textAlign: "center",
     color: "white",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: width * 0.045,
   },
   bottomText: {
     textAlign: "center",
     color: "white",
-    
   },
   linkText: {
     color: "#F72585",
