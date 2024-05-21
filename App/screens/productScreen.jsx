@@ -3,18 +3,19 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { ref, push } from "firebase/database";
 import { useAuth } from "../hooks/useAuth";
 import { database } from "../config/firebase";
+import { useNavigation } from "@react-navigation/native";
 
 
-function add_basket(item) {
-  const { user } = useAuth();
+
+function add_basket(item, navigation, user) {
   if (user) {
     const add_basket = ref(database, `user/${user.uid}/basket`);
     push(add_basket, item);
-    console.log(item);
+    navigation.goBack();
   }
 };
-
 function ProductScreen({ route, navigation }) {
+  const { user } = useAuth();
   const { item } = route.params;
   const [selectedDot, setSelectedDot] = useState(null);
   const [prices] = useState({
@@ -22,7 +23,6 @@ function ProductScreen({ route, navigation }) {
     "50cl": "2,50€",
     "75cl": "4,50€",
   });
-
 
   const handleDotPress = (dotIndex) => {
     setSelectedDot(dotIndex);
@@ -59,7 +59,10 @@ function ProductScreen({ route, navigation }) {
             </>
           )}
         </View>
-        <TouchableOpacity style={styles.button} onPress={add_basket(item)}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => add_basket(item, navigation, user)}
+        >
           <Text style={styles.buttonText}>Ajouter</Text>
         </TouchableOpacity>
       </View>
