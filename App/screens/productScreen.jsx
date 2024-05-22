@@ -1,74 +1,74 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { ref, push } from "firebase/database";
 import { useAuth } from "../hooks/useAuth";
 import { database } from "../config/firebase";
 import { useNavigation } from "@react-navigation/native";
 
-
-
-function add_basket(item, navigation, user) {
+function add_basket(item, selectedFormat, navigation, user) {
   if (user) {
     const add_basket = ref(database, `user/${user.uid}/basket`);
-    push(add_basket, item);
+    const itemToAdd = {
+      ...item,
+      selectedFormat: selectedFormat,
+      price: item.price[selectedFormat]
+    };
+    push(add_basket, itemToAdd);
     navigation.goBack();
   }
-};
+}
+
 function ProductScreen({ route, navigation }) {
   const { user } = useAuth();
   const { item } = route.params;
   const [selectedDot, setSelectedDot] = useState(null);
-  const [prices] = useState({
-    "33cl": "1,50€",
-    "50cl": "2,50€",
-    "75cl": "4,50€",
-  });
+  const [selectedFormat, setSelectedFormat] = useState(null);
 
-  const handleDotPress = (dotIndex) => {
+  const handleDotPress = (dotIndex, format) => {
     setSelectedDot(dotIndex);
+    setSelectedFormat(format);
   };
 
   return (
     <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back" size={30} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Détails du produit</Text>
+        <View style={styles.headerIcon}></View>
+      </View>
       <View style={styles.card}>
         <View style={styles.imageContainer}>
-          <Image source={item.image} style={styles.image} />
+          <Image source={{ uri: item.image }} style={styles.image} />
         </View>
-        <Text style={styles.format}>Format</Text>
+        <Text style={styles.itemName}>{item.name}</Text>
         <View style={styles.dotsContainer}>
-          {(item.category === "Boissons" || item.category === "Alcools") && (
-            <>
-              <Dot
-                onPress={() => handleDotPress(0)}
-                selected={selectedDot === 0}
-                text="33cl"
-                price={prices["33cl"]}
-              />
-              <Dot
-                onPress={() => handleDotPress(1)}
-                selected={selectedDot === 1}
-                text="50cl"
-                price={prices["50cl"]}
-              />
-              <Dot
-                onPress={() => handleDotPress(2)}
-                selected={selectedDot === 2}
-                text="75cl"
-                price={prices["75cl"]}
-              />
-            </>
-          )}
+          {Object.keys(item.price).map((format, index) => (
+            <Dot
+              key={index}
+              onPress={() => handleDotPress(index, format)}
+              selected={selectedDot === index}
+              text={format}
+              price={item.price[format]}
+            />
+          ))}
         </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => add_basket(item, navigation, user)}
+          onPress={() => add_basket(item, selectedFormat, navigation, user)}
+          disabled={selectedDot === null} // Disable button if no format is selected
         >
-          <Text style={styles.buttonText}>Ajouter</Text>
+          <Text style={styles.buttonText}>Ajouter au panier</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-};
+}
 
 const Dot = ({ onPress, selected, text, price }) => {
   return (
@@ -89,6 +89,30 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  headerContainer: {
+    marginTop: "10%",
+    marginBottom: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingHorizontal: 20,
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: "600",
+    textTransform: "uppercase",
+    color: "#FDFDFD",
+    textAlign: "center",
+    flex: 1,
+  },
+  backButton: {
+    padding: 8,
+  },
+  headerIcon: {
+    width: 30,
+    height: 30,
+  },
   card: {
     backgroundColor: "#FDFDFD", // Fond blanc pour la carte
     borderRadius: 10,
@@ -105,10 +129,11 @@ const styles = StyleSheet.create({
     width: 200,
     height: 100,
   },
-  format: {
+  itemName: {
     fontSize: 24,
     color: "#560BAD",
-    marginTop: 40,
+    marginTop: 20,
+    textAlign: "center",
   },
   dotsContainer: {
     flexDirection: "row",
@@ -149,9 +174,17 @@ const styles = StyleSheet.create({
     color: "#FDFDFD", // Texte blanc
     padding: 10, // Espacement interne
     borderRadius: 5, // Coins arrondis
-    marginTop: "70%", // Espacement du haut
+    marginTop: "auto", // Espacement du haut
     borderRadius: 10,
     alignItems: "center",
+  },
+  buttonText: {
+    color: "#FDFDFD",
+    fontSize: 18,
+  },
+  backButton: {
+    marginRight: 10,
+    padding: 8,
   },
 });
 

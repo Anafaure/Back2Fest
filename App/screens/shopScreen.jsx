@@ -11,83 +11,57 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { database, ref, onValue } from '../config/firebase'; // Assurez-vous d'importer Firebase
 
-const items = [
-  {
-    name: "Coca-Cola (Canette)",
-    price: "1.50€",
-    image: require("../assets/Coca-Cola.png"),
-    category: "Boissons",
-  },
-  {
-    name: "Lays (Chips)",
-    price: "4€",
-    image: require("../assets/chips.png"),
-    category: "Snacks",
-  },
-  {
-    name: "Sandwich",
-    price: "7€",
-    image: require("../assets/sandwich.png"),
-    category: "Sandwichs",
-  },
-  {
-    name: "Desperados (Bière)",
-    price: "1,50€",
-    image: require("../assets/biere.png"),
-    category: "Alcools",
-  },
-  {
-    name: "Frites",
-    price: "2€",
-    image: require("../assets/frites.png"),
-    category: "Snacks",
-  },
-  {
-    name: "Burger",
-    price: "4€",
-    image: require("../assets/burger.png"),
-    category: "Sandwichs",
-  },
-];
+const ShopScreen = () => {
+  const [selectedButton, setSelectedButton] = useState(null);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [allItems, setAllItems] = useState([]);
 
-function renderItems(item, navigation) {
-  return (
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    // Récupérer les données des produits depuis Firebase
+    const productsRef = ref(database, 'produits');
+    onValue(productsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const itemsArray = Object.values(data);
+        setAllItems(itemsArray);
+        setFilteredItems(itemsArray);
+      }
+    });
+  }, []);
+
+  const handleButtonClick = (label) => {
+    if (selectedButton === label) {
+      // Deselect the currently selected filter
+      setSelectedButton(null);
+      setFilteredItems(allItems); // Show all items again
+    } else {
+      // Select the clicked filter and apply it
+      setSelectedButton(label);
+      setFilteredItems(allItems.filter((item) => item.category === label));
+    }
+  };
+
+  const renderItems = ({ item }) => (
     <TouchableOpacity
       style={styles.itemCard}
       onPress={() => navigation.navigate("Product", { item })}
     >
       <View>
         <Image
-          source={item.image}
+          source={{ uri: item.image }} // Utilisation de l'URL de Firebase Storage
           style={styles.itemImage}
           resizeMode="contain"
         />
         <Text style={styles.itemText}>
-          {item.name} - {item.price}
+          {item.name}
         </Text>
       </View>
     </TouchableOpacity>
   );
-}
-
-const ShopScreen = () => {
-  const [selectedButton, setSelectedButton] = useState(null);
-  const [filteredItems, setFilteredItems] = useState(items);
-
-  const navigation = useNavigation();
-
-  const handleButtonClick = (label) => {
-    if (selectedButton === label) {
-      // Deselect the currently selected filter
-      setSelectedButton(null);
-      setFilteredItems(items); // Show all items again
-    } else {
-      // Select the clicked filter and apply it
-      setSelectedButton(label);
-      setFilteredItems(items.filter((item) => item.category === label));
-    }
-  };
 
   return (
     <View style={{ flex: 1, backgroundColor: "#121212" }}>
@@ -102,7 +76,7 @@ const ShopScreen = () => {
           <Text style={styles.headerTitle}>Boutique</Text>
           <View style={styles.headerIcon}>
             <TouchableOpacity onPress={() => navigation.navigate("Basket")}>
-              <Ionicons name="basket-outline" size={24} color="white"/>
+              <Ionicons name="basket-outline" size={24} color="#F72585" />
             </TouchableOpacity>
           </View>
         </View>
@@ -110,7 +84,7 @@ const ShopScreen = () => {
           horizontal
           contentContainerStyle={styles.actionButtonsContainer}
           showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
         >
           <ActionButton
             label="Boissons"
@@ -137,7 +111,7 @@ const ShopScreen = () => {
           style={styles.shop}
           data={filteredItems}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => renderItems(item, navigation)}
+          renderItem={renderItems}
           ListEmptyComponent={
             <Text style={styles.noInfoText}>Aucun achat disponible</Text>
           }
@@ -199,6 +173,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
   },
   headerTitle: {
     fontSize: 32,
@@ -209,6 +184,13 @@ const styles = StyleSheet.create({
   backButton: {
     marginRight: 10,
     padding: 8,
+  },
+  headerIcon: {
+    width: 50,
+    height: 35,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
   },
   itemCard: {
     flexDirection: "column",
@@ -223,16 +205,28 @@ const styles = StyleSheet.create({
     color: "#000",
     fontSize: 18,
     marginTop: 5,
+    textAlign: 'center',
   },
   itemImage: {
     width: 100,
     height: 100,
+    resizeMode: 'contain',
+    alignSelf: "center"
   },
   shop: {
     width: "100%",
     marginTop: 10,
     marginBottom: 20,
     alignContent: "center",
+  },
+  gainList: {
+    justifyContent: "space-around",
+  },
+  noInfoText: {
+    color: "#FDFDFD",
+    fontSize: 24,
+    textAlign: "center",
+    marginTop: 20,
   },
 });
 

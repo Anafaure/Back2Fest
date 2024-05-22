@@ -207,7 +207,7 @@ const EventApp = () => {
                   style={styles.duration}
                 >{`${event.heure_debut} - ${event.heure_fin}`}</Text>
                 <Text style={[styles.scene, getSceneTextColor(event.scene)]}>
-                  {`Scene ${event.scene}`}
+                  {`Scène ${event.scene}`}
                 </Text>
               </View>
               <TouchableOpacity

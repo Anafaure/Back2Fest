@@ -74,6 +74,7 @@ function SignUpScreen({ navigation }) {
     birthdate: "",
     firstname: "",
     lastname: "",
+    numeroBillet:"",
     error: "",
   });
 
@@ -86,7 +87,7 @@ function SignUpScreen({ navigation }) {
   const regex_password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   async function signUp() {
-    if (value.email === "" || value.password === "" || value.passwordCheck === "" || value.birthdate === "" || value.firstname === "" || value.lastname === "") {
+    if (value.email === "" || value.password === "" || value.passwordCheck === "" || value.birthdate === "" || value.firstname === "" || value.lastname === ""|| value.numeroBillet === "") {
       setValue({
         ...value,
         error: "All fields are mandatory.",
@@ -136,7 +137,7 @@ function SignUpScreen({ navigation }) {
         nom: value.lastname,
         dateNaissance: value.birthdate,
         age: userAge,
-        numeroBillet: Math.floor(Math.random() * 1000000),
+        numeroBillet: value.numeroBillet
       });
 
       navigation.navigate("Sign In");
@@ -232,6 +233,14 @@ function SignUpScreen({ navigation }) {
                   onChangeText={(text) => setValue({ ...value, lastname: text })}
                 />
               </View>
+              <View style={responsiveStyles.inputContainer}>
+                <Icon style={responsiveStyles.icon} name="ticket" size={18} color="gray" />
+                <TextInput
+                  placeholder="Numéro de Billet (AA111AA)"
+                  style={responsiveStyles.input}
+                  onChangeText={(text) => setValue({ ...value, numeroBillet: text })}
+                />
+              </View>
             </View>
             <Pressable style={responsiveStyles.button} onPress={signUp}>
               <Text style={responsiveStyles.buttonText}>Créer un compte</Text>
@@ -273,12 +282,6 @@ const createResponsiveStyles = (width, height) => StyleSheet.create({
     marginHorizontal: width * 0.04,
     marginTop: height * 0.1,
     marginBottom: height * 0.1,
-  },
-  logo: {
-    width: width * 0.6,
-    height: undefined,
-    aspectRatio: 1,
-    alignSelf: "center",
   },
   title: {
     fontSize: width * 0.06,

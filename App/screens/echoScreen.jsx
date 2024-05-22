@@ -15,17 +15,11 @@ const rewards = [
     { type: 'Perdu', utilise: 'non' },
 ];
 
-const items = [
-    { name: 'Coca-Cola (Canette)', price: '1.50€', image: require('../assets/Coca-Cola.png') },
-    { name: 'Lays (Chips)', price: '4€', image: require('../assets/chips.png') },
-    { name: 'Sandwich', price: '7€', image: require('../assets/sandwich.png') },
-    { name: 'Desperados (Bière)', price: '2€', image: require('../assets/biere.png') }
-];
-
 function EchoScreen() {
     const [activeTab, setActiveTab] = useState('roulette');
     const [reward, setReward] = useState(null);
     const [gains, setGains] = useState([]);
+    const [achats, setAchats] = useState([]);
     const { user } = useAuth();
     const navigation = useNavigation();
     const [modalVisible, setModalVisible] = useState(false);
@@ -79,8 +73,25 @@ function EchoScreen() {
                     setGains([]);
                 }
             });
+
+            const achatsRef = ref(database, `user/${user.uid}/achat`);
+            onValue(achatsRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    const achatsArray = Object.values(data);
+                    setAchats(achatsArray);
+                    console.log("Achats fetched:", achatsArray); // Log fetched data for debugging
+                } else {
+                    setAchats([]);
+                    console.log("No achat found")
+                }
+            });
         }
     }, [activeTab, user]);
+
+    // useEffect(() => {
+    //     console.log("Achats state updated:", achats);
+    // }, [achats]);
 
     const getRewardIcon = (type) => {
         if (type === 'RedBull offerte') {
@@ -112,9 +123,9 @@ function EchoScreen() {
         );
     };
 
-    const renderItems = ({ item }) => (
+    const renderAchats = ({ item }) => (
         <View style={styles.itemCard}>
-            <Image source={item.image} style={styles.itemImage} resizeMode="contain"/>
+            <Image source={{ uri: item.image }} style={styles.itemImage} resizeMode="contain"/>
             <Text style={styles.itemText}>
                 {item.name} - {item.price}
             </Text>
@@ -131,6 +142,7 @@ function EchoScreen() {
                             source={require('../assets/roue.png')}
                         />
                         <TouchableOpacity onPress={handleCircleClick} style={styles.centerCircle} />
+                        <Text style={{color:"white"}}>1 utilisation possible par jour</Text>
                     </View>
                 </View>
             );
@@ -153,10 +165,10 @@ function EchoScreen() {
     const sendAlert = () => {
         Alert.alert('Transfert effectué', 'Vos gains/achats ont été transférés à votre gourde')
     };
+
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
                 <View style={styles.header}>
                     <View style={styles.headerTitleContainer}>
                         <Image
@@ -166,7 +178,7 @@ function EchoScreen() {
                     </View>
                     <View style={styles.headerIcon}>
                         <TouchableOpacity onPress={() => navigation.navigate('Shop')}>
-                            <Ionicons name="storefront-outline" size={24} color="white" />
+                            <Ionicons name="storefront-outline" size={24} color="#F72585" alignSelf="center" />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -200,25 +212,29 @@ function EchoScreen() {
                     </View>
 
                     {renderContent()}
+                    
                 </View>
                 <TouchableOpacity
                         style={styles.logoutButton}
                         onPress={() => {sendAlert()}}
                     >
                         <Text style={styles.logoutText}>Transférer mes gains/achats à ma gourde</Text>
-                    </TouchableOpacity>
+                </TouchableOpacity>
 
                 <Text style={styles.mainTitle}>Vos achats</Text>
                 <View style={styles.shopContainer}>
-                    <FlatList
-                        style={styles.shop}
-                        data={items}
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={renderItems}
-                        ListEmptyComponent={<Text style={styles.noInfoText}>Aucun achat disponible</Text>}
-                        numColumns={2}
-                        contentContainerStyle={styles.gainList}
-                    />
+                    {achats.length > 0 ? (
+                        <FlatList
+                            style={styles.shop}
+                            data={achats}
+                            keyExtractor={(item, index) => index.toString()}
+                            renderItem={renderAchats}
+                            numColumns={2}
+                            contentContainerStyle={styles.gainList}
+                        />
+                    ) : (
+                        <Text style={styles.noInfoText}>Aucun achat disponible</Text>
+                    )}
                 </View>
             </ScrollView>
 
@@ -252,7 +268,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#121212',
         alignItems: 'center',
-        // padding: 26,
     },
     header: {
         flexDirection: 'row',
@@ -268,10 +283,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     headerIcon: {
-        width: 35,
+        width: 50, // Adjusted width for spacing
         height: 35,
-        position: 'relative',
-        display: 'flex',
+        justifyContent: 'center', // Center vertically
+        alignItems: 'center',
+        marginRight: 10, // Added margin for spacing from the edge
     },
     mainSection: {
         width: '100%',
@@ -280,7 +296,7 @@ const styles = StyleSheet.create({
         fontSize: 36,
         color: '#FDFDFD',
         marginBottom: 20,
-        marginLeft:"5%"
+        marginLeft: "5%",
     },
     options: {
         flexDirection: 'row',
@@ -375,6 +391,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: 18,
         marginTop: 5,
+        textAlign: 'center',
     },
     itemImage: {
         width: 100,
