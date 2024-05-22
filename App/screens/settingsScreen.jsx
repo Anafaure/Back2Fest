@@ -60,14 +60,14 @@ const SettingsScreen = () => {
                     </View>
                 <ScrollView style={styles.contentContainer} showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}>
-                    <Text style={styles.userName}>{userInfo.prenom || 'Prénom'} {userInfo.nom || 'Nom'}</Text>
+                    {/* <Text style={styles.userName}>{userInfo.prenom || 'Prénom'} {userInfo.nom || 'Nom'}</Text> */}
 
                     <View style={styles.sectionContainer}>
-                        <MenuOption
+                        {/* <MenuOption
                             iconName="lock-closed"
                             label="Mot de passe et sécurité"
                             onPress={() => navigateToScreen('Security')}
-                        />
+                        /> */}
                         <MenuOption
                             iconName="person-circle"
                             label="Informations personnelles"
@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     sectionContainer: {
         flexDirection: 'column',
         gap: 20,
+        marginBottom:20,
     },
     menuOption: {
         flexDirection: 'row',
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#2A2A2A',
         borderRadius: 5,
         padding: 10,
-        marginBottom: 20,
+        // marginBottom: 20,
     },
     optionLabel: {
         fontSize: 20,

@@ -76,10 +76,10 @@ export default function HomeScreen() {
               <Text style={responsiveStyles.sos}>S.O.S</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Map')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Carte')}>
             <Image
               style={responsiveStyles.map}
-              source={{ uri: "https://i.pinimg.com/736x/c4/aa/29/c4aa29390e06dbc542bbcd498a19546e.jpg" }}
+              source={require("../assets/maps/map.png") }
             />
           </TouchableOpacity>
         </View>
